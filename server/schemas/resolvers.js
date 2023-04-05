@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Skill, Category} = require('../models');
+const { User, Skill, Category, Session} = require('../models');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
@@ -52,15 +52,20 @@ const resolvers = {
 
       throw new AuthenticationError('Not logged in');
     },
-    updateSkill: async (parent, { id, quantity }) => {
-      const decrement = Math.abs(quantity) * -1;
-
-      return Skill.findByIdAndUpdate(
-        id,
-        { $inc: { quantity: decrement } },
-        { new: true }
-      );
+    updateSkill: async (parent, context) => {
+        if (context.skill) {
+            return Skill.findByIdAndUpdate(context.skill.id, args, {
+              new: true,
+            });
+          }
     },
+    updateSession: async (parent, { id, quantity }) => {
+        if (context.session) {
+            return Session.findByIdAndUpdate(context.session.id, args, {
+              new: true,
+            });
+          }
+      },
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
 

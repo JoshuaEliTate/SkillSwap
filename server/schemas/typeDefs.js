@@ -8,6 +8,12 @@ type User{
     password: String!
     skills: [Skill]
 }
+type Session{
+    _id:ID
+    date: String
+    time: String
+    location: String
+}
 type Skill {
     _id:ID
     category: Category
@@ -15,6 +21,7 @@ type Skill {
     description: String!
     price: Int
     image: String
+    session: Session
 }
 type Category {
     skills: Skill
@@ -32,6 +39,7 @@ type Query {
     skills(category: ID, name: String): [Skill]
     skill(_id: ID!): Skill
     user: User
+    session: Session
   }
 
   type Mutation {
@@ -46,6 +54,7 @@ type Query {
       password: String
     ): User
     updateSkill(_id: ID!): Skill
+    updateSession(_id: ID!): Session
     login(email: String!, password: String!): Auth
   }
 `
