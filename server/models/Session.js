@@ -1,6 +1,6 @@
 const { Schema, model } = require('mongoose');
 
-const skillSchema = new Schema(
+const sessionSchema = new Schema(
   {
     date: {
       type: String,
@@ -23,6 +23,6 @@ const skillSchema = new Schema(
 );
 
 
-const Skill = model('Skill', skillSchema);
+const Session = model('Session', sessionSchema);
 
-module.exports = Skill;
+module.exports = Session;
