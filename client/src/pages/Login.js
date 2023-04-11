@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
 
-import { createUser } from '../utils/API';
+import { loginUser } from '../utils/API';
 
-const AppLogin = () => {
+const AppLogin = (props) => {
   const [userFormData, setUserFormData] = useState({
     username: '',
     password: '',
@@ -21,7 +21,7 @@ const AppLogin = () => {
     const form = event.currentTarget;
 
     try {
-      const response = await createUser(userFormData);
+      const response = await loginUser(userFormData);
 
       if (!response.ok) {
         console.log(userFormData);
@@ -33,12 +33,12 @@ const AppLogin = () => {
       console.log(user);
       // Auth.create(token);
     } catch (err) {
+      console.log(err);
       console.error(err);
     }
 
     setUserFormData({
       username: '',
-      email: '',
       password: '',
     });
   };

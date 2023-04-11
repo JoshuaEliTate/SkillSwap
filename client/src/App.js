@@ -8,6 +8,7 @@ import {
   createHttpLink,
 } from '@apollo/client';
 import Home from './pages/Home';
+import User from './pages/User';
 import Singup from './pages/Singup';
 import Login from './pages/Login';
 import Navbar from './components/Navbar';
@@ -26,6 +27,7 @@ function App() {
         <div className='container'>
           <Routes>
             <Route path='/' element={<Home />} />
+            <Route path='/user' element={<User />} />
             <Route path='/singup' element={<Singup />} />
             <Route path='/login' element={<Login />} />
           </Routes>

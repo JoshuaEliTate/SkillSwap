@@ -11,6 +11,12 @@ const AppNavbar = () => {
         </p>
       </Link>
 
+      <Link className='text-dark' to='/user'>
+        <p className='m-0' style={{ fontSize: '24px' }}>
+          User
+        </p>
+      </Link>
+
       <Link className='text-dark' to='/login'>
         <p className='m-0' style={{ fontSize: '24px' }}>
           Login
