@@ -6,7 +6,7 @@ const routes = require('./routes');
 const { typeDefs, resolvers } = require('./schemas');
 
 const app = express();
-const PORT = process.env.PORT || 3003;
+const PORT = process.env.PORT || 3001;
 const server = new ApolloServer({
   typeDefs,
   resolvers,
@@ -23,8 +23,10 @@ app.use(express.json());
 // }
 
 
-
-app.use(routes);
+app.get("/test", (req, res)=>{
+  res.json("it worked")
+})
+app.use( routes);
 
 
 // db.once('open', () => {

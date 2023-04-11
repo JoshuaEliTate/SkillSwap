@@ -17,7 +17,7 @@ type Session{
 }
 type Skill {
     _id:ID
-    category: Category
+    
     skillName: String!
     description: String!
     price: Int

@@ -28,13 +28,28 @@ module.exports = {
   },
   // create a user, sign a token, and send it back (to client/src/components/SignUpForm.js)
   async createUser({ body }, res) {
-    const user = await User.create(body);
+    try {
+      const { username, email, password } = body;
 
-    if (!user) {
-      return res.status(400).json({ message: 'Something is wrong!' });
+      // Validate that the body has username, email, and password
+      if (!username || !email || !password) {
+        return res.status(400).json({ message: 'Please provide username, email, and password' });
+      }
+
+      const user = await User.create(body);
+
+      if (!user) {
+        return res.status(400).json({ message: 'Unable to create user. Please try again.' });
+      }
+
+      const token = signToken(user);
+      res.json({ token, user });
+    } catch (e) {
+      if (e.code === 11000) { // Duplicate key error
+        return res.status(400).json({ message: 'User with this email or username already exists' });
+      }
+      return res.status(500).json({ message: 'An unexpected error occurred' });
     }
-    const token = signToken(user);
-    res.json({ token, user });
   },
   // login a user, sign a token, and send it back (to client/src/components/LoginForm.js)
   // {body} is destructured req.body
