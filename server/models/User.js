@@ -9,19 +9,19 @@ const userSchema = new Schema(
     username: {
       type: String,
       required: true,
-      unique: false,
+      unique: true,
     },
     email: {
       type: String,
       required: true,
-      unique: false,
+      unique: true,
       match: [/.+@.+\..+/, 'Must use a valid email address'],
     },
     password: {
       type: String,
       required: true,
     },
-    skillss: [Skill.schema],
+    skills: [Skill.schema], //changed this back to "skills"
   },
   // set this to use virtual below
   {
@@ -46,8 +46,9 @@ userSchema.methods.isCorrectPassword = async function (password) {
   return bcrypt.compare(password, this.password);
 };
 
-// when we query a user, we'll also get another field called `bookCount` with the number of saved books we have
-userSchema.virtual('skills').get(function () {
+// you probably won't need this virtual
+// If needed, please rename this virtual to avoid any potential naming conflicts.
+userSchema.virtual('virtualSkills').get(function () {
   return this.skills.length;
 });
 
