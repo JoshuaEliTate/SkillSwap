@@ -3,7 +3,7 @@ import { Form, Button, Alert } from 'react-bootstrap';
 
 import { createUser } from '../utils/API';
 
-const AppSingin = () => {
+const AppSingup = () => {
   const [userFormData, setUserFormData] = useState({username: '', email: '', password: '' });
   const [validated] = useState(false);
 
@@ -76,4 +76,4 @@ const AppSingin = () => {
   );
 };
 
-export default AppSingin;
+export default AppSingup;

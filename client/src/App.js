@@ -7,7 +7,7 @@ import {
   ApolloProvider,
   createHttpLink,
 } from '@apollo/client';
-import Singin from './components/Singin';
+import Singup from './pages/Singup';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 
@@ -20,7 +20,7 @@ function App() {
   return (
     <div className='App'>
       <Navbar></Navbar>
-      <Singin />
+      <Singup />
       <Footer />
     </div>
   );

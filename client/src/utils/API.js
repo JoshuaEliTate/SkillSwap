@@ -20,7 +20,7 @@
   
   // remove saved book data for a logged in user
   export const getUser = (userId, token) => {
-    return fetch(`/api/users/books/${userId}`, {
+    return fetch(`/api/users/user/${userId}`, {
       method: 'GET',
     //   headers: {
     //     authorization: `Bearer ${token}`,
