@@ -1,5 +1,4 @@
 const { Schema, model } = require('mongoose');
-const Category = require('./Category');
 
 const skillSchema = new Schema(
   {
@@ -12,7 +11,14 @@ const skillSchema = new Schema(
       type: Number,
       required: false,
     },
-    // category: [Category.schema],
+    user: {
+      type: Schema.Types.ObjectId,
+      ref: 'User'
+    },
+    category: {
+      type: Schema.Types.ObjectId,
+      ref: 'Category'
+    }
   },
 
   {

@@ -7,7 +7,7 @@ const {
 
 // put authMiddleware anywhere we need to send a token for verification of user
 router.route('/').post(createSkill);
-router.route('/:category').get(grabSkills);
+router.route('/searchskill/:category').get(grabSkills);
 
 
 module.exports = router;

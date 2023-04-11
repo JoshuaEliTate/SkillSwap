@@ -8,6 +8,12 @@ const categorySchema = new Schema({
     required: true,
     trim: true,
   },
+  skills: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Skills'
+    }
+  ]
 });
 
 const Category = mongoose.model('Category', categorySchema);

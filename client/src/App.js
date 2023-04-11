@@ -8,6 +8,7 @@ import {
   createHttpLink,
 } from '@apollo/client';
 import Singup from './pages/Singup';
+import Search from './pages/Search';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 
@@ -21,6 +22,7 @@ function App() {
     <div className='App'>
       <Navbar></Navbar>
       <Singup />
+      <Search />
       <Footer />
     </div>
   );

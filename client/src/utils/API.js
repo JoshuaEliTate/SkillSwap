@@ -27,3 +27,12 @@
     //   },
     });
   };
+
+  export const searchSkill = (skillData) => {
+    return fetch(`/api/skill/searchskill/${skillData}`, {
+      method: 'Get',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+  };

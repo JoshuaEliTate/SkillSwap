@@ -4,7 +4,9 @@ const { signToken } = require('../utils/auth');
 
 const resolvers = {
   Query: {
-    categories: async () => Category.find(),
+    categories: async (parent, args, context) => {
+     return await Category.find(context).populate('skills')
+    },
     skills: async (parent, { category, name }) => {
       const params = {};
 
@@ -18,17 +20,14 @@ const resolvers = {
         };
       }
 
-      return Skill.find(params).populate('category');
+      return Skill.find(params).populate('user');
     },
     skill: async (parent, { id }) =>
-      Skill.findById(id).populate('category'),
+      Skill.findById(id).populate('user'),
 
     user: async (parent, args, context) => {
       if (context.user) {
-        const user = await User.findById(context.user.id).populate({
-          path: 'skillss',
-          populate: 'category',
-        });
+        const user = await User.findById(context.user.id).populate('skills');
 
         return user;
       }
