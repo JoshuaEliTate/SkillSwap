@@ -1,13 +1,15 @@
 import './App.css';
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import {
   ApolloClient,
   InMemoryCache,
   ApolloProvider,
   createHttpLink,
 } from '@apollo/client';
+import Home from './pages/Home';
 import Singup from './pages/Singup';
+import Login from './pages/Login';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 
@@ -18,11 +20,22 @@ const client = new ApolloClient({
 
 function App() {
   return (
-    <div className='App'>
-      <Navbar></Navbar>
-      <Singup />
-      <Footer />
-    </div>
+    <ApolloProvider client={client}>
+      <Router>
+        <Navbar></Navbar>
+        <div className='container'>
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/singup' element={<Singup />} />
+            <Route path='/login' element={<Login />} />
+          </Routes>
+        </div>
+
+        <div>
+          <Footer />
+        </div>
+      </Router>
+    </ApolloProvider>
   );
 }
 
