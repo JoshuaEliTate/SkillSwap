@@ -3,7 +3,7 @@ import { Form, Button, Alert } from 'react-bootstrap';
 
 import { createUser } from '../utils/API';
 
-const AppSingup = () => {
+const AppSingin = () => {
   const [userFormData, setUserFormData] = useState({
     username: '',
     email: '',
@@ -72,10 +72,10 @@ const AppSingup = () => {
           onChange={handleInputChange}
           value={userFormData.password}
         ></input>
-        <button type='submit'>Sing Up</button>
+        <button type='submit'>Submit</button>
       </header>
     </Form>
   );
 };
 
-export default AppSingup;
+export default AppSingin;

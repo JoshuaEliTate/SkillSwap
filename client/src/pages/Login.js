@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
 
-import { createUser } from '../utils/API';
+import { loginUser } from '../utils/API';
+import { LOGIN } from '../utils/mutations';
+import Auth from '../utils/auth';
 
-const AppSingup = () => {
+const AppLogin = () => {
   const [userFormData, setUserFormData] = useState({
     username: '',
-    email: '',
     password: '',
   });
   const [validated] = useState(false);
+
+  //   const [login, { error }] = useMutation(LOGIN);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -22,7 +25,7 @@ const AppSingup = () => {
     const form = event.currentTarget;
 
     try {
-      const response = await createUser(userFormData);
+      const response = await loginUser(userFormData);
 
       if (!response.ok) {
         console.log(userFormData);
@@ -34,12 +37,12 @@ const AppSingup = () => {
       console.log(user);
       // Auth.create(token);
     } catch (err) {
+      console.log(err);
       console.error(err);
     }
 
     setUserFormData({
       username: '',
-      email: '',
       password: '',
     });
   };
@@ -47,7 +50,7 @@ const AppSingup = () => {
   return (
     <Form onSubmit={handleFormSubmit}>
       <header className='App-header'>
-        <h1>SingUp</h1>
+        <h1>Login</h1>
         <p>Username:</p>
         <input
           type='username'
@@ -56,14 +59,7 @@ const AppSingup = () => {
           onChange={handleInputChange}
           value={userFormData.username}
         ></input>
-        <p>Email:</p>
-        <input
-          type='email'
-          placeholder='your email'
-          name='email'
-          onChange={handleInputChange}
-          value={userFormData.email}
-        ></input>
+
         <p>password:</p>
         <input
           type='password'
@@ -72,10 +68,10 @@ const AppSingup = () => {
           onChange={handleInputChange}
           value={userFormData.password}
         ></input>
-        <button type='submit'>Sing Up</button>
+        <button type='submit'>Login</button>
       </header>
     </Form>
   );
 };
 
-export default AppSingup;
+export default AppLogin;
