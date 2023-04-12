@@ -20,7 +20,7 @@ const AppLogin = () => {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
-    // check if form has everything (as per react-bootstrap docs)
+    // check if form has everything (as per react-bootstrap docs)...
     const form = event.currentTarget;
 
     try {
