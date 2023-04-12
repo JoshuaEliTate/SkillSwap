@@ -72,7 +72,7 @@ const AppSingup = () => {
           onChange={handleInputChange}
           value={userFormData.password}
         ></input>
-        <button type='submit'>SingUp</button>
+        <button type='submit'>Sing Up</button>
       </header>
     </Form>
   );

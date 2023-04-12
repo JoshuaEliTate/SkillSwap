@@ -2,13 +2,17 @@ import React, { useState } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
 
 import { loginUser } from '../utils/API';
+import { LOGIN } from '../utils/mutations';
+import Auth from '../utils/auth';
 
-const AppLogin = (props) => {
+const AppLogin = () => {
   const [userFormData, setUserFormData] = useState({
     username: '',
     password: '',
   });
   const [validated] = useState(false);
+
+  //   const [login, { error }] = useMutation(LOGIN);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
