@@ -5,11 +5,22 @@ import { Navbar, Nav, Container, Modal, Tab } from 'react-bootstrap';
 const AppNavbar = () => {
   return (
     <div>
-      <ul>
-        <li>Home</li>
-        <li>Login</li>
-        <li>Logout</li>
-      </ul>
+      <Link className='text-dark' to='/'>
+        <p className='m-0' style={{ fontSize: '24px' }}>
+          Home
+        </p>
+      </Link>
+
+      <Link className='text-dark' to='/login'>
+        <p className='m-0' style={{ fontSize: '24px' }}>
+          Login
+        </p>
+      </Link>
+      <Link className='text-dark' to='/singup'>
+        <p className='m-0' style={{ fontSize: '24px' }}>
+          SingUp
+        </p>
+      </Link>
     </div>
   );
 };

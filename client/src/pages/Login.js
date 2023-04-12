@@ -3,10 +3,9 @@ import { Form, Button, Alert } from 'react-bootstrap';
 
 import { createUser } from '../utils/API';
 
-const AppSingup = () => {
+const AppLogin = () => {
   const [userFormData, setUserFormData] = useState({
     username: '',
-    email: '',
     password: '',
   });
   const [validated] = useState(false);
@@ -17,7 +16,7 @@ const AppSingup = () => {
   };
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-
+ 
     // check if form has everything (as per react-bootstrap docs)
     const form = event.currentTarget;
 
@@ -47,7 +46,7 @@ const AppSingup = () => {
   return (
     <Form onSubmit={handleFormSubmit}>
       <header className='App-header'>
-        <h1>SingUp</h1>
+        <h1>Login</h1>
         <p>Username:</p>
         <input
           type='username'
@@ -56,14 +55,7 @@ const AppSingup = () => {
           onChange={handleInputChange}
           value={userFormData.username}
         ></input>
-        <p>Email:</p>
-        <input
-          type='email'
-          placeholder='your email'
-          name='email'
-          onChange={handleInputChange}
-          value={userFormData.email}
-        ></input>
+
         <p>password:</p>
         <input
           type='password'
@@ -72,10 +64,10 @@ const AppSingup = () => {
           onChange={handleInputChange}
           value={userFormData.password}
         ></input>
-        <button type='submit'>SingUp</button>
+        <button type='submit'>Login</button>
       </header>
     </Form>
   );
 };
 
-export default AppSingup;
+export default AppLogin;

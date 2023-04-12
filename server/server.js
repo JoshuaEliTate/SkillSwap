@@ -28,6 +28,10 @@ app.get("/test", (req, res)=>{
 })
 app.use( routes);
 
+app.use("/",(req, res)=>{
+res.status(404).send()  
+})
+
 
 // db.once('open', () => {
 //   app.listen(PORT, () => console.log(`🌍 Now listening on localhost:${PORT}`));

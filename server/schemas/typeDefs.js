@@ -23,7 +23,7 @@ type Skill {
     image: String
     session: Session
     user: User
-    category: Category
+
 }
 type Category {
     skills: [Skill]

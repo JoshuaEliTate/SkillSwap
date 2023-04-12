@@ -10,6 +10,6 @@ module.exports = {
   createSkill(req, res) {
     Skill.create(req.body)
       .then((dbSkillData) => res.json(dbSkillData))
-      .catch((err) => res.status(500).json(err));
+      .catch((err) => res.status(500).json());
   },
 };

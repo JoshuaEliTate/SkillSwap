@@ -27,9 +27,9 @@ const resolvers = {
 
     user: async (parent, args, context) => {
       if (context.user) {
-        const user = await User.findById(context.user.id).populate('skills');
-
-        return user;
+        // const user = await User.findById(context.user.id).populate('skills');
+        return User.findOne({ _id: userId });
+        // return user;
       }
 
       throw new AuthenticationError('Not logged in');
