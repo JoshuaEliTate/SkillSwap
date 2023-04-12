@@ -3,7 +3,8 @@ import { gql } from '@apollo/client';
 export const QUERY_SINGLE_USER = gql`
 query User($userId: ID!) {
     user(userId: $userId) {
-      username
+        _id
+        username
     }
   }
 `;

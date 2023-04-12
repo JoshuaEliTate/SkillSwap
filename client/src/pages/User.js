@@ -9,7 +9,7 @@ import Auth from '../utils/auth';
 
 const AppUser = () => {
   const { userId } = useParams();
-
+  // console.log(userId)
   // If there is no `userId` in the URL as a parameter, execute the `QUERY_ME` query instead for the logged in user's information
   const { loading, data } = useQuery(
     userId ? QUERY_SINGLE_USER : QUERY_ME,
@@ -17,10 +17,10 @@ const AppUser = () => {
       variables: { userId: userId },
     }
   );
-
+    console.log(Auth.getUser())
   // Check if data is returning from the `QUERY_ME` query, then the `QUERY_SINGLE_user` query
-  const user = data?.me || data?.user || {};
-
+  const user = Auth.getUser().data|| {};
+    // console.log(user)
   // Use React Router's `<Navigate />` component to redirect to personal user page if username is yours
   if (Auth.loggedIn() && Auth.getUser().data._id === userId) {
     return <Navigate to="/user" />;
@@ -30,7 +30,7 @@ const AppUser = () => {
     return <div>Loading...</div>;
   }
 
-  if (!user?.name) {
+  if (!Auth.loggedIn()) {
     return (
       <h4>
         You need to be logged in to see your user page. Use the navigation
