@@ -36,9 +36,10 @@ type Auth {
 type Query {
     skills(category: ID, name: String): [Skill]
     skill(_id: ID!): Skill
-    user: User
+    user(userId: ID!): User
     session: Session
     categories: Category
+    me: User
   }
 
   type Mutation {

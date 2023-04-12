@@ -27,3 +27,13 @@ export const getUser = (userId, token) => {
     //   },
   });
 };
+
+export const createSkill = (skillData) => {
+  return fetch(`/api/skill`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(skillData),
+  });
+};
