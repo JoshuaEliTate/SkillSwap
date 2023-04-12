@@ -12,7 +12,6 @@ const AppLogin = () => {
   });
   const [validated] = useState(false);
   const [loginUser, { error, data }] = useMutation(LOGIN);
-  //   const [login, { error }] = useMutation(LOGIN);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -26,18 +25,13 @@ const AppLogin = () => {
 
     try {
       const { data } = await loginUser({ variables: { ...userFormData } });
-
-      if (!data.ok) {
+      if (!data) {
         console.log(userFormData);
-        // createUser(userFormData);
         throw new Error('something went wrong!');
       }
       Auth.login(data.login.token);
-      //   const { token, user } = await data.json();
       console.log(Auth.data);
-      // Auth.create(token);
     } catch (error) {
-      //   console.log(err);
       console.log(data);
     }
 
