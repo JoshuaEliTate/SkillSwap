@@ -9,7 +9,7 @@ const skillSchema = new Schema(
       unique: false,
     },
     price: {
-      type: Number,
+      type: String,
       required: false,
     },
     description: {
