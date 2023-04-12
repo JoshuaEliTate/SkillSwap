@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
-
+import { useMutation } from '@apollo/client';
 import { loginUser } from '../utils/API';
 import { LOGIN } from '../utils/mutations';
 import Auth from '../utils/auth';
 
 const AppLogin = () => {
   const [userFormData, setUserFormData] = useState({
-    username: '',
+    email: '',
     password: '',
   });
   const [validated] = useState(false);
-
+  const [loginUser, { error, data }] = useMutation(LOGIN);
   //   const [login, { error }] = useMutation(LOGIN);
 
   const handleInputChange = (event) => {
@@ -25,39 +25,40 @@ const AppLogin = () => {
     const form = event.currentTarget;
 
     try {
-      const response = await loginUser(userFormData);
+      const { data } = await loginUser({ variables: { ...userFormData } });
 
-      if (!response.ok) {
+      if (!data.ok) {
         console.log(userFormData);
         // createUser(userFormData);
         throw new Error('something went wrong!');
       }
-
-      const { token, user } = await response.json();
-      console.log(user);
+      Auth.login(data.login.token);
+      //   const { token, user } = await data.json();
+      console.log(Auth.data);
       // Auth.create(token);
-    } catch (err) {
-      console.log(err);
-      console.error(err);
+    } catch (error) {
+      //   console.log(err);
+      console.log(data);
     }
 
     setUserFormData({
-      username: '',
+      email: '',
       password: '',
     });
   };
 
   return (
-    <Form onSubmit={handleFormSubmit}>
+    <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
       <header className='App-header'>
         <h1>Login</h1>
-        <p>Username:</p>
+        <p>Email:</p>
         <input
-          type='username'
-          placeholder='your username'
-          name='username'
+          type='email'
+          placeholder='your email'
+          name='email'
           onChange={handleInputChange}
-          value={userFormData.username}
+          value={userFormData.email}
+          required
         ></input>
 
         <p>password:</p>

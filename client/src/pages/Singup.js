@@ -32,7 +32,7 @@ const AppSingup = () => {
 
       const { token, user } = await response.json();
       console.log(user);
-      Auth.create(token);
+      // Auth.getToken(token);
     } catch (err) {
       console.error(err);
     }
