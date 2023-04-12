@@ -21,10 +21,13 @@ app.use(express.json());
 //   app.use(express.static(path.join(__dirname, '../client/build')));
 // }
 
+
+
 // app.get("/test", (req, res)=>{
 //   res.json("it worked")
 // })
-app.use('/api', routes);
+app.use( "/api", routes);
+
 
 // db.once('open', () => {
 //   app.listen(PORT, () => console.log(`🌍 Now listening on localhost:${PORT}`));

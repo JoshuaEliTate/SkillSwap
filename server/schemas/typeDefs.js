@@ -17,12 +17,10 @@ type Session{
 }
 type Skill {
     _id:ID
-    
     skillName: String!
     description: String!
     price: Int
-    image: String
-    session: Session
+    user: User
 }
 type Category {
     skills: [Skill]
