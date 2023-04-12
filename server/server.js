@@ -23,10 +23,10 @@ app.use(express.json());
 // }
 
 
-app.get("/test", (req, res)=>{
-  res.json("it worked")
-})
-app.use( routes);
+// app.get("/test", (req, res)=>{
+//   res.json("it worked")
+// })
+app.use( "/api", routes);
 
 
 // db.once('open', () => {

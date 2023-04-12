@@ -21,7 +21,12 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
-    skills: [Skill.schema], //changed this back to "skills"
+    skills: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Skill'
+      }
+    ]
   },
   // set this to use virtual below
   {

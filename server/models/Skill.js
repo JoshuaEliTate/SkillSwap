@@ -12,6 +12,19 @@ const skillSchema = new Schema(
       type: Number,
       required: false,
     },
+    description: {
+      type: String,
+      required: false,
+      unique: false,
+    },
+    user: {
+      type: Schema.Types.ObjectId,
+      ref: 'User'
+    },
+    category: {
+      type: Schema.Types.ObjectId,
+      ref: 'Category'
+    }
     // category: [Category.schema],
   },
 
