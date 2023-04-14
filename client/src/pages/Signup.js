@@ -74,6 +74,9 @@ const AppSignup = () => {
           value={userFormData.password}
         ></input>
         <button type='submit'>Sign Up</button>
+        <p>
+          Already have an account? <a href='/login'>Log in</a>
+        </p>
       </header>
     </Form>
   );

@@ -4,7 +4,6 @@ import SkillCreate from '../components/CreateSkill';
 import { Navigate, useParams } from 'react-router-dom';
 import { QUERY_SINGLE_USER, QUERY_ME } from '../utils/queries';
 import { useQuery } from '@apollo/client';
-
 import Auth from '../utils/auth';
 
 const AppUser = () => {
@@ -53,7 +52,7 @@ const AppUser = () => {
         <p>{`${user.email}'s`}</p>
         <p>
           {data.me.skills[0]
-            ? `${data.me.skills[0].skillName}, ${data.me.skills[0].description}, ${data.me.skills[0].price}`
+            ? `${data.me.skills[1].skillName}, ${data.me.skills[1].description}, ${data.me.skills[1].price}`
             : 'No Skills'}
         </p>
         <SkillCreate />

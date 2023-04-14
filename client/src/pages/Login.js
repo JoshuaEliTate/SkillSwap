@@ -33,7 +33,7 @@ const AppLogin = () => {
       console.log(Auth.data);
     } catch (error) {
       console.log(data);
-      alert("Incorrect Email or Password")
+      alert('Incorrect Email or Password');
     }
 
     setUserFormData({
@@ -44,28 +44,53 @@ const AppLogin = () => {
 
   return (
     <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
-      <header className='App-header'>
-        <h1>Login</h1>
-        <p>Email:</p>
-        <input
-          type='email'
-          placeholder='your email'
-          name='email'
-          onChange={handleInputChange}
-          value={userFormData.email}
-          required
-        ></input>
+      <div className='wrapper'>
+        <span className='icon-colse'>
+          <ion-icon name='close'></ion-icon>
+        </span>
+        <div className='form-box login'>
+          <h2>Login</h2>
+          <div className='input-box'>
+            <span className='icon'>
+              <ion-icon name='mail'></ion-icon>
+            </span>
+            <input
+              type='email'
+              name='email'
+              onChange={handleInputChange}
+              value={userFormData.email}
+              required
+            ></input>
+            <label>Email</label>
+          </div>
 
-        <p>password:</p>
-        <input
-          type='password'
-          placeholder='your password'
-          name='password'
-          onChange={handleInputChange}
-          value={userFormData.password}
-        ></input>
-        <button type='submit'>Login</button>
-      </header>
+          <div className='input-box'>
+            <span className='icon'>
+              <ion-icon name='lock-closed'></ion-icon>
+            </span>
+            <input
+              type='password'
+              name='password'
+              onChange={handleInputChange}
+              value={userFormData.password}
+              required
+            ></input>
+            <label>Password</label>
+          </div>
+
+          <button type='submit' className='btn'>
+            Login
+          </button>
+          <div className='login-register'>
+            <p>
+              Don't have an account?{' '}
+              <a href='#' className='register-link'>
+                Register
+              </a>
+            </p>
+          </div>
+        </div>
+      </div>
     </Form>
   );
 };
