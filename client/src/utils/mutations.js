@@ -22,3 +22,37 @@ export const ADD_USER = gql`
     }
   }
 `;
+
+export const ADD_SKILL = gql`
+mutation addSkill($skillName: String, $description: String, $price: Int) {
+  addSkill(skillName: $skillName, description: $description, price: $price) {
+    skillName
+    description
+    price
+    user {
+      _id
+      username
+    }
+  }
+}`
+
+
+// export const ADD_SKILL = gql`
+//   mutation addSkill(
+//     $skillName: String!
+//     $price: String!
+//     $description: String
+//   ) {
+//     addSkill(
+//       skillName: $skillName
+//       price: $price
+//       description: $description
+//     ) {
+//       _id
+//       skillName
+//       description
+//       price
+//       user
+//     }
+//   }
+// `;

@@ -14,7 +14,11 @@ query Me {
     me {
         _id
         username
-        skills
         email
+        skills{
+          skillName
+          description
+          price
+        }
     }
   }`;

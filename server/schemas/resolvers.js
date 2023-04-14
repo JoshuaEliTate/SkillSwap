@@ -1,6 +1,7 @@
 const { AuthenticationError } = require('apollo-server-express');
 const { User, Skill, Category, Session} = require('../models');
 const { signToken } = require('../utils/auth');
+const { findById } = require('../models/Category');
 
 const resolvers = {
   Query: {
@@ -25,19 +26,10 @@ const resolvers = {
       
       me: async (parent, args, context) => {
         if (context.user) {
-          return Profile.findOne({ _id: context.user._id });
+          return User.findOne({ _id: context.user._id }).populate('skills');
         }
         throw new AuthenticationError('You need to be logged in!');
       },
-    // user: async (parent, args, context) => {
-    //   if (context.user) {
-    //     const user = await User.findById(context.user.id).populate('skills');
-
-    //     return user;
-    //   }
-
-    //   throw new AuthenticationError('Not logged in');
-    // },
     user: async (parent, { userId }) => {
       return User.findOne({ _id: userId });
     },
@@ -48,6 +40,21 @@ const resolvers = {
       const token = signToken(user);
 
       return { token, user };
+    },
+    addSkill: async (parent, args, context) => {
+      console.log(context.user)
+      console.log(context.user._id)
+      const object = await {...args, user:context.user._id}
+      const skill = await Skill.create(object)
+      const user = await User.findById(context.user._id)
+      user.skills.push(skill._id)
+      await user.save()
+      const finalSkill = await Skill.findById(skill._id).populate('user').populate({
+        path: 'skills',
+        populate: 'skill'
+      });
+      console.log(finalSkill)
+      return finalSkill
     },
     updateUser: async (parent, args, context) => {
       if (context.user) {

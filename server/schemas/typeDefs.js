@@ -17,8 +17,8 @@ type Session{
 }
 type Skill {
     _id:ID
-    skillName: String!
-    description: String!
+    skillName: String
+    description: String
     price: Int
     user: User
 }
@@ -48,6 +48,11 @@ type Query {
       email: String!
       password: String!
     ): Auth
+    addSkill(
+      skillName: String
+      description: String
+      price: Int
+    ): Skill
     updateUser(
       username: String
       email: String

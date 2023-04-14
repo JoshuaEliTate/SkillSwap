@@ -27,6 +27,7 @@ const AppSingup = () => {
       if (!response.ok) {
         console.log(userFormData);
         // createUser(userFormData);
+        alert("Email or Password are in Use")
         throw new Error('something went wrong!');
       }
 

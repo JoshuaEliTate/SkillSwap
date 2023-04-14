@@ -33,6 +33,7 @@ const AppLogin = () => {
       console.log(Auth.data);
     } catch (error) {
       console.log(data);
+      alert("Incorrect Email or Password")
     }
 
     setUserFormData({
