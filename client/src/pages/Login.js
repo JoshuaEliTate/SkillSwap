@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Form, Button, Alert } from 'react-bootstrap';
 import { useMutation } from '@apollo/client';
 import { loginUser } from '../utils/API';
@@ -64,6 +65,10 @@ const AppLogin = () => {
           value={userFormData.password}
         ></input>
         <button type='submit'>Login</button>
+
+        <p>
+          Don't have an account? <a href='/singup'>Sing up</a>
+        </p>
       </header>
     </Form>
   );

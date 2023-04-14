@@ -1,5 +1,5 @@
 export const createUser = (userData) => {
-  return fetch('/api/users', {
+  return fetch('/api/users/singup', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

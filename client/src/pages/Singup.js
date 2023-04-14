@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Form, Button, Alert } from 'react-bootstrap';
-
+import Auth from '../utils/auth';
 import { createUser } from '../utils/API';
 
 const AppSingup = () => {
@@ -32,7 +33,7 @@ const AppSingup = () => {
 
       const { token, user } = await response.json();
       console.log(user);
-      // Auth.getToken(token);
+      Auth.getToken(token);
     } catch (err) {
       console.error(err);
     }
@@ -73,6 +74,9 @@ const AppSingup = () => {
           value={userFormData.password}
         ></input>
         <button type='submit'>Sing Up</button>
+        <p>
+          Already have an account? <a href='/login'>Log in</a>
+        </p>
       </header>
     </Form>
   );
