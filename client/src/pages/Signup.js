@@ -3,7 +3,7 @@ import { Form, Button, Alert } from 'react-bootstrap';
 
 import { createUser } from '../utils/API';
 
-const AppSingup = () => {
+const AppSignup = () => {
   const [userFormData, setUserFormData] = useState({
     username: '',
     email: '',
@@ -27,7 +27,7 @@ const AppSingup = () => {
       if (!response.ok) {
         console.log(userFormData);
         // createUser(userFormData);
-        alert("Email or Password are in Use")
+        alert('Email or Password are in Use');
         throw new Error('something went wrong!');
       }
 
@@ -48,7 +48,7 @@ const AppSingup = () => {
   return (
     <Form onSubmit={handleFormSubmit}>
       <header className='App-header'>
-        <h1>SingUp</h1>
+        <h1>SignUp</h1>
         <p>Username:</p>
         <input
           type='username'
@@ -73,10 +73,10 @@ const AppSingup = () => {
           onChange={handleInputChange}
           value={userFormData.password}
         ></input>
-        <button type='submit'>Sing Up</button>
+        <button type='submit'>Sign Up</button>
       </header>
     </Form>
   );
 };
 
-export default AppSingup;
+export default AppSignup;

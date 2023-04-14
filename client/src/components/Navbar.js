@@ -22,9 +22,9 @@ const AppNavbar = () => {
           Login
         </p>
       </Link>
-      <Link className='text-dark' to='/singup'>
+      <Link className='text-dark' to='/signup'>
         <p className='m-0' style={{ fontSize: '24px' }}>
-          SingUp
+          SignUp
         </p>
       </Link>
     </div>
