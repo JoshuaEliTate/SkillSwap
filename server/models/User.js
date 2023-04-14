@@ -21,8 +21,12 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
-    // set savedBooks to be an array of data that adheres to the bookSchema
-    skills: [Skill.schema],
+    skills: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Skill'
+      }
+    ]
   },
   // set this to use virtual below
   {
@@ -47,9 +51,10 @@ userSchema.methods.isCorrectPassword = async function (password) {
   return bcrypt.compare(password, this.password);
 };
 
-// when we query a user, we'll also get another field called `bookCount` with the number of saved books we have
-userSchema.virtual('bookCount').get(function () {
-  return this.savedUsers.length;
+// you probably won't need this virtual
+// If needed, please rename this virtual to avoid any potential naming conflicts.
+userSchema.virtual('virtualSkills').get(function () {
+  return this.skills.length;
 });
 
 const User = model('User', userSchema);

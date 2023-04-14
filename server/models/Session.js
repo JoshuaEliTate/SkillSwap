@@ -1,28 +1,28 @@
-const { Schema, model } = require('mongoose');
+// const { Schema, model } = require('mongoose');
 
-const skillSchema = new Schema(
-  {
-    date: {
-      type: String,
-      required: false,
-    },
-    time: {
-      type: String,
-      required: false,
-    },
-    location: {
-      type: String,
-      required: false,
-    },
-  },
-  {
-    toJSON: {
-      virtuals: true,
-    },
-  }
-);
+// const sessionSchema = new Schema(
+//   {
+//     date: {
+//       type: String,
+//       required: false,
+//     },
+//     time: {
+//       type: String,
+//       required: false,
+//     },
+//     location: {
+//       type: String,
+//       required: false,
+//     },
+//   },
+//   {
+//     toJSON: {
+//       virtuals: true,
+//     },
+//   }
+// );
 
 
-const Skill = model('Skill', skillSchema);
+// const Session = model('Session', sessionSchema);
 
-module.exports = Skill;
+// module.exports = Session;

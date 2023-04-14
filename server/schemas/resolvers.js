@@ -18,22 +18,28 @@ const resolvers = {
         };
       }
 
-      return Skill.find(params).populate('category');
+      return Skill.find(params).populate('user');
     },
     skill: async (parent, { id }) =>
-      Skill.findById(id).populate('category'),
+      Skill.findById(id).populate('user'),
+      
+      me: async (parent, args, context) => {
+        if (context.user) {
+          return Profile.findOne({ _id: context.user._id });
+        }
+        throw new AuthenticationError('You need to be logged in!');
+      },
+    // user: async (parent, args, context) => {
+    //   if (context.user) {
+    //     const user = await User.findById(context.user.id).populate('skills');
 
-    user: async (parent, args, context) => {
-      if (context.user) {
-        const user = await User.findById(context.user.id).populate({
-          path: 'skills',
-          populate: 'category',
-        });
+    //     return user;
+    //   }
 
-        return user;
-      }
-
-      throw new AuthenticationError('Not logged in');
+    //   throw new AuthenticationError('Not logged in');
+    // },
+    user: async (parent, { userId }) => {
+      return User.findOne({ _id: userId });
     },
   },
   Mutation: {

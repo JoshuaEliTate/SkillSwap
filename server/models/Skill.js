@@ -1,22 +1,33 @@
 const { Schema, model } = require('mongoose');
+const Category = require('./Category');
 
 const skillSchema = new Schema(
   {
-    category: {
-      type: String,
-      required: true,
-      unique: true,
-    },
     skillName: {
       type: String,
-      required: true,
-      unique: true,
+      required: false,
+      unique: false,
     },
     price: {
-      type: Number,
-      required: true,
+      type: String,
+      required: false,
     },
+    description: {
+      type: String,
+      required: false,
+      unique: false,
+    },
+    user: {
+      type: Schema.Types.ObjectId,
+      ref: 'User'
+    },
+    category: {
+      type: Schema.Types.ObjectId,
+      ref: 'Category'
+    }
+    // category: [Category.schema],
   },
+
   {
     toJSON: {
       virtuals: true,

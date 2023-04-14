@@ -1,6 +1,7 @@
 const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
+
 type User{
     _id:ID
     username: String!
@@ -16,15 +17,13 @@ type Session{
 }
 type Skill {
     _id:ID
-    category: Category
     skillName: String!
     description: String!
     price: Int
-    image: String
-    session: Session
+    user: User
 }
 type Category {
-    skills: Skill
+    skills: [Skill]
     _id:ID
     name: String
   }
@@ -35,11 +34,12 @@ type Auth {
 }
 
 type Query {
-    skills: [Skill]
     skills(category: ID, name: String): [Skill]
     skill(_id: ID!): Skill
-    user: User
+    user(userId: ID!): User
     session: Session
+    categories: Category
+    me: User
   }
 
   type Mutation {
