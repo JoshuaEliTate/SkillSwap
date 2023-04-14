@@ -9,7 +9,6 @@ const AppHome = () => {
     return (
       <Form>
         <Login />
-        <Signup />
       </Form>
     );
   } else

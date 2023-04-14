@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
-import { Form, Button, Alert } from 'react-bootstrap';
-
 import { createUser } from '../utils/API';
 
 const AppSignup = () => {
+  //control wrapper active
+  const [isActive, setIsActive] = useState(false);
+
+  const onClickSwitch = () => {
+    setIsActive(!isActive);
+  };
   const [userFormData, setUserFormData] = useState({
     username: '',
     email: '',
@@ -46,39 +50,64 @@ const AppSignup = () => {
   };
 
   return (
-    <Form onSubmit={handleFormSubmit}>
-      <header className='App-header'>
-        <h1>SignUp</h1>
-        <p>Username:</p>
-        <input
-          type='username'
-          placeholder='your username'
-          name='username'
-          onChange={handleInputChange}
-          value={userFormData.username}
-        ></input>
-        <p>Email:</p>
-        <input
-          type='email'
-          placeholder='your email'
-          name='email'
-          onChange={handleInputChange}
-          value={userFormData.email}
-        ></input>
-        <p>password:</p>
-        <input
-          type='password'
-          placeholder='your password'
-          name='password'
-          onChange={handleInputChange}
-          value={userFormData.password}
-        ></input>
-        <button type='submit'>Sign Up</button>
-        <p>
-          Already have an account? <a href='/login'>Log in</a>
-        </p>
-      </header>
-    </Form>
+    <div onSubmit={handleFormSubmit}>
+      <div className='form-box register'>
+        <h2>Registration</h2>
+        <div className='input-box'>
+          <span className='icon'>
+            <ion-icon name='person'></ion-icon>
+          </span>
+          <input
+            type='username'
+            name='username'
+            onChange={handleInputChange}
+            value={userFormData.username}
+            required
+          ></input>
+          <label>Username</label>
+        </div>
+
+        <div className='input-box'>
+          <span className='icon'>
+            <ion-icon name='mail'></ion-icon>
+          </span>
+          <input
+            type='email'
+            name='email'
+            onChange={handleInputChange}
+            value={userFormData.email}
+            required
+          ></input>
+          <label>Email</label>
+        </div>
+
+        <div className='input-box'>
+          <span className='icon'>
+            <ion-icon name='lock-closed'></ion-icon>
+          </span>
+          <input
+            type='password'
+            name='password'
+            onChange={handleInputChange}
+            value={userFormData.password}
+            required
+          ></input>
+          <label>Password</label>
+        </div>
+
+        <button type='submit' className='btn'>
+          Register
+        </button>
+        <div className='login-register'>
+          <p>
+            Already have an account?{' '}
+            <a href='#' className='login-link' onClick={onClickSwitch}>
+              Login
+            </a>
+          </p>
+        </div>
+      </div>
+    </div>
   );
 };
 

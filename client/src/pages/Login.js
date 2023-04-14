@@ -6,6 +6,15 @@ import { LOGIN } from '../utils/mutations';
 import Auth from '../utils/auth';
 
 const AppLogin = () => {
+  //control wrapper active
+  const [isActive, setIsActive] = useState(false);
+
+  const onClickSwitch = () => {
+    setIsActive(!isActive);
+  };
+
+  //login control
+
   const [userFormData, setUserFormData] = useState({
     email: '',
     password: '',
@@ -43,8 +52,8 @@ const AppLogin = () => {
   };
 
   return (
-    <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
-      <div className='wrapper'>
+    <div noValidate validated={validated} onSubmit={handleFormSubmit}>
+      <div className={`wrapper ${isActive ? 'wrapper active' : ''}`}>
         <span className='icon-colse'>
           <ion-icon name='close'></ion-icon>
         </span>
@@ -77,21 +86,79 @@ const AppLogin = () => {
             ></input>
             <label>Password</label>
           </div>
-
           <button type='submit' className='btn'>
             Login
           </button>
           <div className='login-register'>
             <p>
               Don't have an account?{' '}
-              <a href='#' className='register-link'>
+              <a href='#' className='register-link' onClick={onClickSwitch}>
                 Register
               </a>
             </p>
           </div>
         </div>
+
+        {/* register */}
+
+        <div className='form-box register'>
+          <h2>Registration</h2>
+          <div className='input-box'>
+            <span className='icon'>
+              <ion-icon name='person'></ion-icon>
+            </span>
+            <input
+              type='username'
+              name='username'
+              onChange={handleInputChange}
+              value={userFormData.username}
+              required
+            ></input>
+            <label>Username</label>
+          </div>
+
+          <div className='input-box'>
+            <span className='icon'>
+              <ion-icon name='mail'></ion-icon>
+            </span>
+            <input
+              type='email'
+              name='email'
+              onChange={handleInputChange}
+              value={userFormData.email}
+              required
+            ></input>
+            <label>Email</label>
+          </div>
+
+          <div className='input-box'>
+            <span className='icon'>
+              <ion-icon name='lock-closed'></ion-icon>
+            </span>
+            <input
+              type='password'
+              name='password'
+              onChange={handleInputChange}
+              value={userFormData.password}
+              required
+            ></input>
+            <label>Password</label>
+          </div>
+
+          <button type='submit' className='btn'>
+            Register
+          </button>
+          <div className='login-register'>
+            <p>
+              Already have an account?{' '}
+              <a href='#' className='login-link' onClick={onClickSwitch}>
+                Login
+              </a>
+            </p>
+          </div>
+        </div>
       </div>
-    </Form>
+    </div>
   );
 };
 
