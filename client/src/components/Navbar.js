@@ -11,27 +11,29 @@ const AppNavbar = () => {
     const randomIndex = Math.floor(Math.random() * greetings.length);
     const greeting = greetings[randomIndex];
     const message = `${greeting}, ${user.username}`;
+    // const logoutClick = () => {
+    //   Auth.logout();
+    //   window.location.reload();
+    // };
 
     return (
       <header>
         <nav className='navigation'>
-          <a to='/'>
-            <img src='./images/logo.png' alt='home' />
-          </a>
+          <h2 className='logo'>Logo</h2>
 
-          <a to='/user'>
-            <a className='m-0' style={{ fontSize: '24px' }}>
-              User
-            </a>
-          </a>
+          <a to='/user'>User</a>
 
           <a>{message}</a>
 
-          <a to='/'>
-            <a href='/' onClick={() => Auth.logout()}>
-              Logout
-            </a>
-          </a>
+          <button
+            onClick={() => {
+              Auth.logout();
+              window.location.reload();
+            }}
+            className='btnLogin-popup'
+          >
+            Logout
+          </button>
         </nav>
       </header>
     );

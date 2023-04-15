@@ -41,6 +41,8 @@ const AppLogin = () => {
       }
       Auth.login(data.login.token);
       // console.log(data.login.token);
+      // Reload the current page
+      window.location.reload();
     } catch (error) {
       console.log(data);
       alert('Incorrect Email or Password');
@@ -84,6 +86,8 @@ const AppLogin = () => {
       const { token, user } = await response.json();
       console.log(user);
       // Auth.getToken(token);
+      // Reload the current page
+      window.location.reload();
     } catch (err) {
       console.error(err);
     }
