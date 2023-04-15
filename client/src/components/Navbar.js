@@ -38,13 +38,13 @@ const AppNavbar = () => {
   } else
     return (
       <header>
-        <h2 class='logo'>Logo</h2>
-        <nav class='navigation'>
+        <h2 className='logo'>Logo</h2>
+        <nav className='navigation'>
           <a href='#'>Home</a>
           <a href='#'>About</a>
           <a href='#'>Services</a>
           <a href='#'>Contact</a>
-          <button class='btnLogin-popup'>Login</button>
+          <button className='btnLogin-popup'>Login</button>
         </nav>
       </header>
     );

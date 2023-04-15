@@ -46,7 +46,7 @@ const AppUser = () => {
   // console.log(grabSkills(data))
   return (
     <>
-      <header className='App-header'>
+      <header>
         <h1>User Info</h1>
         <p>{`${user.username}'s`}</p>
         <p>{`${user.email}'s`}</p>

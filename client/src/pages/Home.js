@@ -6,11 +6,7 @@ import Login from './Login';
 
 const AppHome = () => {
   if (!Auth.loggedIn()) {
-    return (
-      <Form>
-        <Login />
-      </Form>
-    );
+    return <Login />;
   } else
     return (
       <Form>

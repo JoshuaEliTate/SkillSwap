@@ -15,45 +15,45 @@ const AppLogin = () => {
 
   //login control
 
-  const [userFormData, setUserFormData] = useState({
+  const [userLoginData, setUserLoginData] = useState({
     email: '',
     password: '',
   });
-  const [validated] = useState(false);
+  const [loginValidated] = useState(false);
   const [loginUser, { error, data }] = useMutation(LOGIN);
 
-  const handleInputChange = (event) => {
+  const loginInputChange = (event) => {
     const { name, value } = event.target;
-    setUserFormData({ ...userFormData, [name]: value });
+    setUserLoginData({ ...userLoginData, [name]: value });
   };
-  const handleFormSubmit = async (event) => {
+  const loginFormSubmit = async (event) => {
     event.preventDefault();
 
     // check if form has everything (as per react-bootstrap docs)
     const form = event.currentTarget;
 
     try {
-      const { data } = await loginUser({ variables: { ...userFormData } });
+      const { data } = await loginUser({ variables: { ...userLoginData } });
       if (!data) {
-        console.log(userFormData);
+        console.log(userLoginData);
         throw new Error('something went wrong!');
       }
       Auth.login(data.login.token);
-      console.log(Auth.data);
+      // console.log(data.login.token);
     } catch (error) {
       console.log(data);
       alert('Incorrect Email or Password');
     }
 
-    setUserFormData({
+    setUserLoginData({
       email: '',
       password: '',
     });
   };
 
   return (
-    <div noValidate validated={validated} onSubmit={handleFormSubmit}>
-      <div className={`wrapper ${isActive ? 'wrapper active' : ''}`}>
+    <div className={`wrapper ${isActive ? 'wrapper active' : ''}`}>
+      <Form noValidate validated={loginValidated} onSubmit={loginFormSubmit}>
         <span className='icon-colse'>
           <ion-icon name='close'></ion-icon>
         </span>
@@ -66,8 +66,8 @@ const AppLogin = () => {
             <input
               type='email'
               name='email'
-              onChange={handleInputChange}
-              value={userFormData.email}
+              onChange={loginInputChange}
+              value={userLoginData.email}
               required
             ></input>
             <label>Email</label>
@@ -80,8 +80,8 @@ const AppLogin = () => {
             <input
               type='password'
               name='password'
-              onChange={handleInputChange}
-              value={userFormData.password}
+              onChange={loginInputChange}
+              value={userLoginData.password}
               required
             ></input>
             <label>Password</label>
@@ -98,10 +98,11 @@ const AppLogin = () => {
             </p>
           </div>
         </div>
+      </Form>
 
-        {/* register */}
+      {/* register */}
 
-        <div className='form-box register'>
+      {/* <div className='form-box register'>
           <h2>Registration</h2>
           <div className='input-box'>
             <span className='icon'>
@@ -156,8 +157,7 @@ const AppLogin = () => {
               </a>
             </p>
           </div>
-        </div>
-      </div>
+        </div> */}
     </div>
   );
 };
