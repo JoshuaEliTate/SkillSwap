@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
 import { useMutation } from '@apollo/client';
 import { loginUser } from '../utils/API';
+import { createUser } from '../utils/API';
 import { LOGIN } from '../utils/mutations';
 import Auth from '../utils/auth';
 
@@ -46,6 +47,49 @@ const AppLogin = () => {
     }
 
     setUserLoginData({
+      email: '',
+      password: '',
+    });
+  };
+
+  //for signup part
+
+  const [userSignupData, setUserSignupData] = useState({
+    username: '',
+    email: '',
+    password: '',
+  });
+  const [signupValidated] = useState(false);
+
+  const signupInputChange = (event) => {
+    const { name, value } = event.target;
+    setUserSignupData({ ...userSignupData, [name]: value });
+  };
+  const signupFormSubmit = async (event) => {
+    event.preventDefault();
+
+    // check if form has everything (as per react-bootstrap docs)
+    const form = event.currentTarget;
+
+    try {
+      const response = await createUser(userSignupData);
+
+      if (!response.ok) {
+        console.log(userSignupData);
+        // createUser(userSignupData);
+        alert('Email or Password are in Use');
+        throw new Error('something went wrong!');
+      }
+
+      const { token, user } = await response.json();
+      console.log(user);
+      // Auth.getToken(token);
+    } catch (err) {
+      console.error(err);
+    }
+
+    setUserSignupData({
+      username: '',
       email: '',
       password: '',
     });
@@ -101,8 +145,12 @@ const AppLogin = () => {
       </Form>
 
       {/* register */}
-
-      {/* <div className='form-box register'>
+      <div className='form-box register'>
+        <Form
+          noValidate
+          validated={signupValidated}
+          onSubmit={signupFormSubmit}
+        >
           <h2>Registration</h2>
           <div className='input-box'>
             <span className='icon'>
@@ -111,8 +159,8 @@ const AppLogin = () => {
             <input
               type='username'
               name='username'
-              onChange={handleInputChange}
-              value={userFormData.username}
+              onChange={signupInputChange}
+              value={userSignupData.username}
               required
             ></input>
             <label>Username</label>
@@ -125,8 +173,8 @@ const AppLogin = () => {
             <input
               type='email'
               name='email'
-              onChange={handleInputChange}
-              value={userFormData.email}
+              onChange={signupInputChange}
+              value={userSignupData.email}
               required
             ></input>
             <label>Email</label>
@@ -139,8 +187,8 @@ const AppLogin = () => {
             <input
               type='password'
               name='password'
-              onChange={handleInputChange}
-              value={userFormData.password}
+              onChange={signupInputChange}
+              value={userSignupData.password}
               required
             ></input>
             <label>Password</label>
@@ -157,7 +205,8 @@ const AppLogin = () => {
               </a>
             </p>
           </div>
-        </div> */}
+        </Form>
+      </div>
     </div>
   );
 };
