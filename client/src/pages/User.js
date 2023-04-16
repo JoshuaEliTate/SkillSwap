@@ -1,79 +1,66 @@
-import React, { useState } from 'react';
-import SkillCreate from '../components/CreateSkill';
+import React from 'react';
 import { Navigate, useParams } from 'react-router-dom';
-import { QUERY_SINGLE_USER, QUERY_ME } from '../utils/queries';
 import { useQuery } from '@apollo/client';
+import { QUERY_SINGLE_USER, QUERY_ME } from '../utils/queries';
 import Auth from '../utils/auth';
-
-// import { Card } from 'react-bootstrap';
+import SkillCreate from '../components/CreateSkill';
 
 const AppUser = () => {
   const { userId } = useParams();
-  // console.log(userId)
-  // If there is no `userId` in the URL as a parameter, execute the `QUERY_ME` query instead for the logged in user's information
+
   const { loading, data } = useQuery(userId ? QUERY_SINGLE_USER : QUERY_ME, {
     variables: { userId: userId },
   });
-  console.log(Auth.getUser());
-  // Check if data is returning from the `QUERY_ME` query, then the `QUERY_SINGLE_user` query
-  const user = Auth.getUser().data || {};
-  // console.log(user)
-  // Use React Router's `<Navigate />` component to redirect to personal user page if username is yours
-  if (Auth.loggedIn() && Auth.getUser().data._id === userId) {
-    return <Navigate to='/user' />;
+
+  // If user is not logged in, prompt them to log in
+  if (!Auth.loggedIn()) {
+    return (
+      <a href='/'>
+        You need to be logged in to see your user page. Use is link to sign up
+        or log in!
+      </a>
+    );
+  }
+  // Get user data from Auth
+  const { data: userData } = Auth.getUser();
+  // Redirect to homepage if user is viewing their own profile
+  if (Auth.loggedIn() && userData._id === userId) {
+    return <Navigate to='/' />;
   }
 
+  // Render loading message while query is running
   if (loading) {
     return <div>Loading...</div>;
   }
 
-  if (!Auth.loggedIn()) {
-    return (
-      <h4>
-        You need to be logged in to see your user page. Use the navigation links
-        above to sign up or log in!
-      </h4>
-    );
-  }
-  //  const grabSkills = async (allData)=> {
-  //   let Data = await allData.me.skills
-  //     for (let i = 0; i < allData.me.skills.length; i++) {
-  //       let skillName =  await allData.me.skills[i].skillName
-  //       let description = await allData.me.skills[i].description
-  //       let price = await allData.me.skills[i].price
-  //       let skillHTML = await `${skillName}, ${description}, ${price} `
-  //     }
-  //   }
-  // console.log(grabSkills(data))
-  // console.log(data.me);
+  // Otherwise, render the user's profile
+  const user = userId ? data?.user : userData || {};
+
   return (
     <div>
+      <SkillCreate />
       <div className='profile'>
         <h2>My profile</h2>
         <p>Name: {user.username}</p>
         <p>Email: {user.email}</p>
-        <p>I have: {data.me.skills.length} skill(s)</p>
+        <p>I have: {data?.me?.skills.length || 0} skill(s)</p>
       </div>
 
       <div className='card'>
-        {data.me.skills.length > 0 ? (
+        {data?.me?.skills.length > 0 ? (
           data.me.skills.map((skill, index) => (
             <div className='container' key={index}>
-              {' '}
-              {/* Move key prop to parent element */}
               <h4>
                 <b>{skill.skillName}</b>
               </h4>
               <p> {skill.description} </p>
-              <p>{skill.price}</p>
+              <p>${skill.price}</p>
             </div>
           ))
         ) : (
           <p>No Skills, please add one</p>
         )}
       </div>
-
-      <SkillCreate />
     </div>
   );
 };

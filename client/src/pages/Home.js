@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
 import Auth from '../utils/auth';
-import Signup from './Signup';
+import { Navigate, useParams } from 'react-router-dom';
+import { useQuery } from '@apollo/client';
+import { QUERY_SINGLE_USER, QUERY_ME } from '../utils/queries';
 import Login from './Login';
 
 const AppHome = () => {

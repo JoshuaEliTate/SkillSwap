@@ -81,14 +81,14 @@ const SkillCreate = () => {
             onChange={handleInputChange}
             value={skillFormData.price}
           ></input>
-          <button
+          <Button
             type='submit'
             onClick={() => {
               window.location.reload();
             }}
           >
             Create Skill
-          </button>
+          </Button>
         </div>
       </Form>
     </div>

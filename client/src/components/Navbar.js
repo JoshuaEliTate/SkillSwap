@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { Navbar, Nav, Container, Modal, Tab } from 'react-bootstrap';
 import Auth from '../utils/auth';
-import { isClose } from '../App';
+import Login from '../pages/Login';
 
 const AppNavbar = () => {
   if (Auth.loggedIn()) {
@@ -38,11 +38,18 @@ const AppNavbar = () => {
       <header>
         <h2 className='logo'>Logo</h2>
         <nav className='navigation'>
-          <a href='#'>Home</a>
+          <a href='/'>Home</a>
           <a href='#'>About</a>
           <a href='#'>Services</a>
           <a href='#'>Contact</a>
-          <button className='btnLogin-popup'>Login</button>
+          <button
+            className='btnLogin-popup'
+            onClick={() => {
+              window.location.reload();
+            }}
+          >
+            Login
+          </button>
         </nav>
       </header>
     );
