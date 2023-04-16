@@ -1,8 +1,9 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Skill, Category, Session} = require('../models');
+const { User, Skill, Category, Session } = require('../models');
 const { signToken } = require('../utils/auth');
 const { findById } = require('../models/Category');
 
+//hello
 const resolvers = {
   Query: {
     categories: async () => Category.find(),
@@ -21,15 +22,14 @@ const resolvers = {
 
       return Skill.find(params).populate('user');
     },
-    skill: async (parent, { id }) =>
-      Skill.findById(id).populate('user'),
-      
-      me: async (parent, args, context) => {
-        if (context.user) {
-          return User.findOne({ _id: context.user._id }).populate('skills');
-        }
-        throw new AuthenticationError('You need to be logged in!');
-      },
+    skill: async (parent, { id }) => Skill.findById(id).populate('user'),
+
+    me: async (parent, args, context) => {
+      if (context.user) {
+        return User.findOne({ _id: context.user._id }).populate('skills');
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    },
     user: async (parent, { userId }) => {
       return User.findOne({ _id: userId });
     },
@@ -42,20 +42,22 @@ const resolvers = {
       return { token, user };
     },
     addSkill: async (parent, args, context) => {
-      console.log(context.user)
-      console.log(context.user._id)
-      const object = await {...args, user:context.user._id}
-      const skill = await Skill.create(object)
-      const user = await User.findById(context.user._id)
-      user.skills.push(skill._id)
-      await user.save()
-      const finalSkill = await Skill.findById(skill._id).populate('user').populate({
-        path: 'skills',
-        populate: 'skill'
-      });
-      console.log(finalSkill)
-      return finalSkill
-    },
+      console.log('context.user', context.user);
+      console.log('context.user._id', context.user._id);
+      const object = await { ...args, user: context.user._id };
+      const skill = await Skill.create(object);
+      const user = await User.findById(context.user._id);
+      user.skills.push(skill._id);
+      await user.save();
+      const finalSkill = await Skill.findById(skill._id)
+        .populate('user')
+        .populate({
+          path: 'skills',
+          populate: 'skill',
+        });
+      console.log(finalSkill);
+      return finalSkill;
+    }, 
     updateUser: async (parent, args, context) => {
       if (context.user) {
         return User.findByIdAndUpdate(context.user.id, args, {
@@ -66,19 +68,19 @@ const resolvers = {
       throw new AuthenticationError('Not logged in');
     },
     updateSkill: async (parent, context) => {
-        if (context.skill) {
-            return Skill.findByIdAndUpdate(context.skill.id, args, {
-              new: true,
-            });
-          }
+      if (context.skill) {
+        return Skill.findByIdAndUpdate(context.skill.id, args, {
+          new: true,
+        });
+      }
     },
     updateSession: async (parent, { id, quantity }) => {
-        if (context.session) {
-            return Session.findByIdAndUpdate(context.session.id, args, {
-              new: true,
-            });
-          }
-      },
+      if (context.session) {
+        return Session.findByIdAndUpdate(context.session.id, args, {
+          new: true,
+        });
+      }
+    },
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
 

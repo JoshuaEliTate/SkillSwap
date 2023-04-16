@@ -14,10 +14,9 @@ const SkillCreate = () => {
   const [addSkill, { error, data }] = useMutation(ADD_SKILL);
 
   const handleInputChange = (event) => {
-  
     let { name, value } = event.target;
-    if(name == 'price'){
-      value = parseInt(value)
+    if (name == 'price') {
+      value = parseInt(value);
     }
     setSkillFormData({ ...skillFormData, [name]: value });
   };
@@ -27,64 +26,72 @@ const SkillCreate = () => {
 
     // check if form has everything (as per react-bootstrap docs)
     const form = event.currentTarget;
-      console.log(skillFormData)
+    console.log(skillFormData);
 
     try {
-      const {response} = await addSkill({variables: { ...skillFormData}});
+      const { response } = await addSkill({ variables: { ...skillFormData } });
 
       if (!response.ok) {
         console.log(skillFormData);
-        console.log("error")
-        // createUser(userFormData);
+        console.log('error');
         throw new Error('something went wrong!');
       }
 
-      const { token, skill } = await response.json();
-      // console.log(skillFormData);
+      const { token, skill } = response.json();
+      // window.location.reload();
     } catch (err) {
       console.error(err);
     }
 
     setSkillFormData({
-        skillName: '',
-        description: '',
-        price: '',
+      skillName: '',
+      description: '',
+      price: '',
     });
   };
 
   return (
-    <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
-      <header className='App-header'>
-        <h1>Create Skill</h1>
-        <p>skill:</p>
-        <input
-          type='text'
-          placeholder='your skill'
-          name='skillName'
-          onChange={handleInputChange}
-          value={skillFormData.skillName}
-        ></input>
+    <div className='profile'>
+      <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
+        <div>
+          <h2>Create Skill</h2>
+          <p>skill:</p>
+          <input
+            type='text'
+            placeholder='your skill'
+            name='skillName'
+            onChange={handleInputChange}
+            value={skillFormData.skillName}
+          ></input>
 
-        <p>description:</p>
-        <input
-          type='text'
-          placeholder='your description'
-          name='description'
-          onChange={handleInputChange}
-          value={skillFormData.description}
-        ></input>
+          <p>description:</p>
+          <input
+            type='text'
+            placeholder='your description'
+            name='description'
+            onChange={handleInputChange}
+            value={skillFormData.description}
+          ></input>
 
-        <p>price:</p>
-        <input
-          type='text'
-          placeholder='your price'
-          name='price'
-          onChange={handleInputChange}
-          value={skillFormData.price}
-        ></input>
-        <button type='submit'>Create Skill</button>
-      </header>
-    </Form>
+          <p>price:</p>
+          <input
+            type='text'
+            placeholder='your price'
+            name='price'
+            onChange={handleInputChange}
+            value={skillFormData.price}
+          ></input>
+          <Button
+            type='submit'
+            onClick={() => {
+              window.location.reload();
+            }}
+          >
+            Create Skill
+          </Button>
+        </div>
+      </Form>
+    </div>
   );
 };
 
