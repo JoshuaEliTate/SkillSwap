@@ -56,7 +56,7 @@ const resolvers = {
         });
       console.log(finalSkill);
       return finalSkill;
-    },
+    }, 
     updateUser: async (parent, args, context) => {
       if (context.user) {
         return User.findByIdAndUpdate(context.user.id, args, {
