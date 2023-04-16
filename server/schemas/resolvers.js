@@ -3,7 +3,7 @@ const { User, Skill, Category, Session } = require('../models');
 const { signToken } = require('../utils/auth');
 const { findById } = require('../models/Category');
 
-
+//hello
 const resolvers = {
   Query: {
     categories: async () => Category.find(),
