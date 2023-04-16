@@ -1,8 +1,6 @@
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
 const Skill = require('./Skill');
-// import schema from Book.js
-// const bookSchema = require('./Book');
 
 const userSchema = new Schema(
   {
@@ -24,9 +22,9 @@ const userSchema = new Schema(
     skills: [
       {
         type: Schema.Types.ObjectId,
-        ref: 'Skill'
-      }
-    ]
+        ref: 'Skill',
+      },
+    ],
   },
   // set this to use virtual below
   {
