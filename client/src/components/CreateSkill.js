@@ -51,38 +51,47 @@ const SkillCreate = () => {
   };
 
   return (
-    <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
-      <div>
-        <h2>Create Skill</h2>
-        <p>skill:</p>
-        <input
-          type='text'
-          placeholder='your skill'
-          name='skillName'
-          onChange={handleInputChange}
-          value={skillFormData.skillName}
-        ></input>
+    <div className='profile'>
+      <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
+        <div>
+          <h2>Create Skill</h2>
+          <p>skill:</p>
+          <input
+            type='text'
+            placeholder='your skill'
+            name='skillName'
+            onChange={handleInputChange}
+            value={skillFormData.skillName}
+          ></input>
 
-        <p>description:</p>
-        <input
-          type='text'
-          placeholder='your description'
-          name='description'
-          onChange={handleInputChange}
-          value={skillFormData.description}
-        ></input>
+          <p>description:</p>
+          <input
+            type='text'
+            placeholder='your description'
+            name='description'
+            onChange={handleInputChange}
+            value={skillFormData.description}
+          ></input>
 
-        <p>price:</p>
-        <input
-          type='text'
-          placeholder='your price'
-          name='price'
-          onChange={handleInputChange}
-          value={skillFormData.price}
-        ></input>
-        <button type='submit'>Create Skill</button>
-      </div>
-    </Form>
+          <p>price:</p>
+          <input
+            type='text'
+            placeholder='your price'
+            name='price'
+            onChange={handleInputChange}
+            value={skillFormData.price}
+          ></input>
+          <button
+            type='submit'
+            onClick={() => {
+              window.location.reload();
+            }}
+          >
+            Create Skill
+          </button>
+        </div>
+      </Form>
+    </div>
   );
 };
 

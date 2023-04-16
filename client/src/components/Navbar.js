@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { Navbar, Nav, Container, Modal, Tab } from 'react-bootstrap';
 import Auth from '../utils/auth';
+import { isClose } from '../App';
 
 const AppNavbar = () => {
   if (Auth.loggedIn()) {
@@ -20,11 +21,12 @@ const AppNavbar = () => {
           <a href='/user'>User</a>
           <a>{message}</a>
           <button
+            href='/'
+            className='btnLogin-popup'
             onClick={() => {
               Auth.logout();
               window.location.reload();
             }}
-            className='btnLogin-popup'
           >
             Logout
           </button>

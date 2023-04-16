@@ -1,5 +1,5 @@
 import './App.css';
-import React from 'react';
+import React, { createContext, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import {
   ApolloClient,
@@ -14,6 +14,7 @@ import Signup from './pages/Signup';
 import Login from './pages/Login';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import { Prev } from 'react-bootstrap/esm/PageItem';
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -35,15 +36,17 @@ const client = new ApolloClient({
 });
 
 function App() {
+  //login isClose
+
   return (
     <ApolloProvider client={client}>
       <Router>
         <Navbar />
+
         <div>
           <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/user' element={<User />} />
-            <Route path='/signup' element={<Signup />} />
             <Route path='/login' element={<Login />} />
           </Routes>
         </div>

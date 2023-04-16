@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { Form, Button, Alert } from 'react-bootstrap';
 import SkillCreate from '../components/CreateSkill';
 import { Navigate, useParams } from 'react-router-dom';
 import { QUERY_SINGLE_USER, QUERY_ME } from '../utils/queries';
 import { useQuery } from '@apollo/client';
 import Auth from '../utils/auth';
+
+// import { Card } from 'react-bootstrap';
 
 const AppUser = () => {
   const { userId } = useParams();
@@ -44,30 +45,35 @@ const AppUser = () => {
   //     }
   //   }
   // console.log(grabSkills(data))
-  console.log(data.me);
+  // console.log(data.me);
   return (
     <div>
-      <div>
-        <div>
-          <h2>My profile</h2>
-          <p>Your name: {user.username}</p>
-          <p>Your email: {user.email}</p>
-          <p>You have: {data.me.skills.length} skill(s)</p>
-          <ul className='list-group'>
-            {data.me.skills.length > 0 ? (
-              data.me.skills.map((skill, index) => (
-                <li key={index}>
-                  <strong>{skill.skillName}</strong> - {skill.description} -{' '}
-                  {skill.price}
-                </li>
-              ))
-            ) : (
-              <p>No Skills, please add one</p>
-            )}
-          </ul>
-          <SkillCreate />
-        </div>
+      <div className='profile'>
+        <h2>My profile</h2>
+        <p>Name: {user.username}</p>
+        <p>Email: {user.email}</p>
+        <p>I have: {data.me.skills.length} skill(s)</p>
       </div>
+
+      <div className='card'>
+        {data.me.skills.length > 0 ? (
+          data.me.skills.map((skill, index) => (
+            <div className='container' key={index}>
+              {' '}
+              {/* Move key prop to parent element */}
+              <h4>
+                <b>{skill.skillName}</b>
+              </h4>
+              <p> {skill.description} </p>
+              <p>{skill.price}</p>
+            </div>
+          ))
+        ) : (
+          <p>No Skills, please add one</p>
+        )}
+      </div>
+
+      <SkillCreate />
     </div>
   );
 };
