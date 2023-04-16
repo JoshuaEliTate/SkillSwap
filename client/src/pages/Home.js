@@ -10,16 +10,21 @@ const AppHome = () => {
   } else
     return (
       <Form>
-        <header>
-          <h1>Home</h1>
-          <p>Search user:</p>
-          <input type='search' placeholder='Search users'></input>
-          <button type='submit'>Submit</button>
+        <Form.Group>
+          <Form.Label>Search user:</Form.Label>
+          <Form.Control type='search' placeholder='Search users' />
+        </Form.Group>
+        <Button variant='primary' type='submit'>
+          Search
+        </Button>
 
-          <p>Search skill:</p>
-          <input type='search' placeholder='Search skills'></input>
-          <button type='submit'>Submit</button>
-        </header>
+        <Form.Group>
+          <Form.Label>Search skill:</Form.Label>
+          <Form.Control type='search' placeholder='Search skills' />
+        </Form.Group>
+        <Button variant='primary' type='submit'>
+          Search
+        </Button>
       </Form>
     );
 };

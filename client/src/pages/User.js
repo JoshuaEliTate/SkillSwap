@@ -44,20 +44,31 @@ const AppUser = () => {
   //     }
   //   }
   // console.log(grabSkills(data))
+  console.log(data.me);
   return (
-    <>
-      <header>
-        <h1>User Info</h1>
-        <p>{`${user.username}'s`}</p>
-        <p>{`${user.email}'s`}</p>
-        <p>
-          {data.me.skills[0]
-            ? `${data.me.skills[1].skillName}, ${data.me.skills[1].description}, ${data.me.skills[1].price}`
-            : 'No Skills'}
-        </p>
-        <SkillCreate />
-      </header>
-    </>
+    <div>
+      <div>
+        <div>
+          <h2>My profile</h2>
+          <p>Your name: {user.username}</p>
+          <p>Your email: {user.email}</p>
+          <p>You have: {data.me.skills.length} skill(s)</p>
+          <ul className='list-group'>
+            {data.me.skills.length > 0 ? (
+              data.me.skills.map((skill, index) => (
+                <li key={index}>
+                  <strong>{skill.skillName}</strong> - {skill.description} -{' '}
+                  {skill.price}
+                </li>
+              ))
+            ) : (
+              <p>No Skills, please add one</p>
+            )}
+          </ul>
+          <SkillCreate />
+        </div>
+      </div>
+    </div>
   );
 };
 

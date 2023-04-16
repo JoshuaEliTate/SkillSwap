@@ -47,10 +47,9 @@ function App() {
             <Route path='/login' element={<Login />} />
           </Routes>
         </div>
-        <div>
-          <Footer />
-        </div>
       </Router>
+
+      {/* <Footer /> */}
     </ApolloProvider>
   );
 }

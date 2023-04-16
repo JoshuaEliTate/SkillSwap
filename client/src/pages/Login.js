@@ -141,7 +141,7 @@ const AppLogin = () => {
             <p>
               Don't have an account?{' '}
               <a href='#' className='register-link' onClick={onClickSwitch}>
-                Register
+                Signup
               </a>
             </p>
           </div>
@@ -155,7 +155,7 @@ const AppLogin = () => {
           validated={signupValidated}
           onSubmit={signupFormSubmit}
         >
-          <h2>Registration</h2>
+          <h2>Signup</h2>
           <div className='input-box'>
             <span className='icon'>
               <ion-icon name='person'></ion-icon>
@@ -199,7 +199,7 @@ const AppLogin = () => {
           </div>
 
           <button type='submit' className='btn'>
-            Register
+            Signup
           </button>
           <div className='login-register'>
             <p>
