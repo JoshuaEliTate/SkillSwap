@@ -27,10 +27,8 @@ const AppHome = () => {
       }
 
       const allUsers = await response.json();
-      setAllUsers(allUsers);
 
-      // console.log(allUsers[7].username);
-      console.log(singleUser.username);
+      setAllUsers(allUsers);
 
       if (singleUser.username) {
         for (let i = 0; i < allUsers.length; i++) {
@@ -44,8 +42,6 @@ const AppHome = () => {
         // If we reach this point, no matching user was found
         return 'User not found';
       }
-
-      console.log('User not found.');
     } catch (error) {
       console.error(error);
     }
