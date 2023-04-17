@@ -19,8 +19,6 @@ export const QUERY_ME = gql`
         skillName
         description
         price
-
-        category
       }
     }
   }
@@ -34,31 +32,3 @@ export const QUERY_ALL_USER = gql`
     }
   }
 `;
-
-export const QUERY_SKILLS = gql`
-  query Skill {
-    skills {
-      _id
-      skillName
-      description
-      price
-      category
-      user {
-        email
-        username
-
-      }
-    }
-  }
-`;
-
-
-export const QUERY_ALL_USER = gql`
-  query Users {
-    users {
-      _id
-      username
-    }
-  }
-`;
-

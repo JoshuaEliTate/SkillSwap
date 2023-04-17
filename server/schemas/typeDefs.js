@@ -19,10 +19,13 @@ const typeDefs = gql`
     skillName: String
     description: String
     price: Int
-    category: String
     user: User
   }
-
+  type Category {
+    skills: [Skill]
+    _id: ID
+    name: String
+  }
 
   type Auth {
     token: ID
@@ -34,13 +37,13 @@ const typeDefs = gql`
     skill(_id: ID!): Skill
     user(userId: ID!): User
     session: Session
-
+    categories: Category
     me: User
   }
 
   type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth
-    addSkill(skillName: String, description: String, price: Int, category: String): Skill
+    addSkill(skillName: String, description: String, price: Int): Skill
     updateUser(username: String, email: String, password: String): User
     updateSkill(_id: ID!): Skill
     updateSession(_id: ID!): Session
