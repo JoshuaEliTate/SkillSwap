@@ -26,15 +26,6 @@ export const QUERY_ME = gql`
   }
 `;
 
-export const QUERY_ALL_USER = gql`
-  query Users {
-    users {
-      _id
-      username
-    }
-  }
-`;
-
 export const QUERY_SKILLS = gql`
   query Skill {
     skills {
@@ -46,12 +37,10 @@ export const QUERY_SKILLS = gql`
       user {
         email
         username
-
       }
     }
   }
 `;
-
 
 export const QUERY_ALL_USER = gql`
   query Users {
@@ -61,4 +50,3 @@ export const QUERY_ALL_USER = gql`
     }
   }
 `;
-

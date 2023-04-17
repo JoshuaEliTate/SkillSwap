@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { Form, Button, Alert } from 'react-bootstrap';
+import { Form, Button } from 'react-bootstrap';
 import { ADD_SKILL } from '../utils/mutations';
-import { createSkill } from '../utils/API';
 import { useMutation } from '@apollo/client';
 
 const SkillCreate = () => {
