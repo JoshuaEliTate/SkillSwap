@@ -5,6 +5,13 @@ const { findById } = require('../models/Category');
 
 const resolvers = {
   Query: {
+    allSkills: async () => {
+      return Skill.find().populate('user');
+    },
+    // category (parent, args, context, info) {
+    //   const { id } = args;
+    //   return context.db.Albums.find((a) => a.id == id)
+    // },
     // categories: async () => Category.find().populate("skills"),
     skills: async (parent, { category, name }) => {
       const params = {};
