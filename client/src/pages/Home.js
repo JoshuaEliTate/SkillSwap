@@ -6,10 +6,13 @@ import { useQuery } from '@apollo/client';
 import { QUERY_SINGLE_USER, QUERY_ME, QUERY_SKILLS } from '../utils/queries';
 import Login from './Login';
 import { getUser, getAllUsers } from '../utils/API';
+
 import SkillsList from '../components/SkillSearchAll';
+
 const AppHome = () => {
   const [singleUser, setSingleUser] = useState({});
   const [allUsers, setAllUsers] = useState({});
+
 
   const [allSkills, setAllSkills] = useState({});
   const [singleSkill, setSingleSkill] = useState({});
@@ -20,10 +23,12 @@ const AppHome = () => {
     const { name, value } = event.target;
     setSingleSkill({ ...singleSkill, [name]: value });
   };
+
   const searchInputChange = (event) => {
     const { name, value } = event.target;
     setSingleUser({ ...singleUser, [name]: value });
   };
+
   const searchAllSkills = async (event) => {
     event.preventDefault();
 
@@ -52,6 +57,7 @@ const AppHome = () => {
     }
   };
 
+
   const searchAllUser = async (event) => {
     event.preventDefault();
 
@@ -65,7 +71,6 @@ const AppHome = () => {
       const allUsers = await response.json();
 
       setAllUsers(allUsers);
-      // console.log(allUsers);
 
       if (singleUser.username) {
         for (let i = 0; i < allUsers.length; i++) {
@@ -104,6 +109,7 @@ const AppHome = () => {
               Search
             </Button>
           </Form>
+
           <Form onSubmit={searchAllSkills}>
             <Form.Group>
               <Form.Label>Search skill:</Form.Label>
@@ -118,6 +124,7 @@ const AppHome = () => {
               Search
             </Button>
           </Form>
+
         </div>
         <div className='card'>
           {allUsers.length > 0 ? (
@@ -132,6 +139,7 @@ const AppHome = () => {
             <p>User not found</p>
           )}
         </div>
+
 
         <div className='card'>
           {allSkills.length > 0 ? (
@@ -148,7 +156,7 @@ const AppHome = () => {
             <p>Skill not found</p>
           )}
         </div>
-      </div>
+
     );
 };
 
