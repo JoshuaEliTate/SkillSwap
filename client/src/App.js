@@ -1,5 +1,5 @@
 import './App.css';
-import React, { createContext, useState } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import {
   ApolloClient,
@@ -10,7 +10,6 @@ import {
 import { setContext } from '@apollo/client/link/context';
 import Home from './pages/Home';
 import User from './pages/User';
-import Signup from './pages/Signup';
 import Login from './pages/Login';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -36,8 +35,6 @@ const client = new ApolloClient({
 });
 
 function App() {
-  //login isClose
-
   return (
     <ApolloProvider client={client}>
       <Router>

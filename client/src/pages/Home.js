@@ -5,7 +5,7 @@ import { Navigate, useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import { QUERY_SINGLE_USER, QUERY_ME, QUERY_SKILLS } from '../utils/queries';
 import Login from './Login';
-import { getUser, getAllUsers } from '../utils/API';
+import { getAllUsers } from '../utils/API';
 
 const AppHome = () => {
   const [singleUser, setSingleUser] = useState({});
@@ -89,64 +89,68 @@ const AppHome = () => {
   } else
     return (
       <div>
-        <div>
-          <Form onSubmit={searchAllUser}>
-            <Form.Group>
-              <Form.Label>Search user:</Form.Label>
+        <div className='centered'>
+          <div className='search-box'>
+            <form onSubmit={searchAllUser}>
+              <label>Search user:</label>
               <input
                 type='search'
                 name='username'
                 onChange={searchInputChange}
                 value={singleUser.username || ''}
               ></input>
-            </Form.Group>
-            <Button variant='primary' type='submit'>
-              Search
-            </Button>
-          </Form>
-          <Form onSubmit={searchAllSkills}>
-            <Form.Group>
-              <Form.Label>Search skill:</Form.Label>
+
+              <button variant='primary' type='submit'>
+                Search
+              </button>
+            </form>
+            <form onSubmit={searchAllSkills}>
+              <label>Search skill:</label>
               <input
                 type='search'
                 name='skillName'
                 onChange={searchSkillsChange}
                 value={singleSkill.skillName || ''}
               ></input>
-            </Form.Group>
-            <Button variant='primary' type='submit'>
-              Search
-            </Button>
-          </Form>
-        </div>
-        <div className='card'>
-          {allUsers.length > 0 ? (
-            allUsers.map((user) => (
-              <div className='container' key={user._id}>
-                <p>Username: {user.username}</p>
-                <p>Email: {user.email}</p>
-                <p>Skill Count: {user.skills.length}</p>
-              </div>
-            ))
-          ) : (
-            <p>User not found</p>
-          )}
+
+              <button variant='primary' type='submit'>
+                Search
+              </button>
+            </form>
+          </div>
         </div>
 
-        <div className='card'>
-          {allSkills.length > 0 ? (
-            allSkills.map((skill) => (
-              <div className='container' key={skill._id}>
-                <p>Category: {skill.category}</p>
-                <p>Skill name: {skill.skillName}</p>
-                <p>Description:{skill.description}</p>
-                <p>Instructor:{skill.user.username}</p>
-                <p>Email: {skill.user.email}</p>
-              </div>
-            ))
-          ) : (
-            <p>Skill not found</p>
-          )}
+        <div className='result-box'>
+          <div className='centered'>
+            <div className='card'>
+              {allUsers.length > 0 ? (
+                allUsers.map((user) => (
+                  <div className='container' key={user._id}>
+                    <p>Username: {user.username}</p>
+                    <p>Email: {user.email}</p>
+                    <p>Skill Count: {user.skills.length}</p>
+                  </div>
+                ))
+              ) : (
+                <p>User not found</p>
+              )}
+            </div>
+            <div className='card'>
+              {allSkills.length > 0 ? (
+                allSkills.map((skill) => (
+                  <div className='container' key={skill._id}>
+                    <p>Category: {skill.category}</p>
+                    <p>Skill name: {skill.skillName}</p>
+                    <p>Description:{skill.description}</p>
+                    <p>Instructor:{skill.user.username}</p>
+                    <p>Email: {skill.user.email}</p>
+                  </div>
+                ))
+              ) : (
+                <p>Skill not found</p>
+              )}
+            </div>
+          </div>
         </div>
       </div>
     );

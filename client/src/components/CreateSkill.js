@@ -57,34 +57,34 @@ const SkillCreate = () => {
       <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
         <div>
           <h2>Create Skill</h2>
-          <p>skill:</p>
+          <p>Name:</p>
           <input
             type='text'
-            placeholder='your skill'
+            placeholder='Your skill'
             name='skillName'
             onChange={handleInputChange}
             value={skillFormData.skillName}
           ></input>
 
-          <p>description:</p>
+          <p>Description:</p>
           <input
             type='text'
-            placeholder='your description'
+            placeholder='Your description'
             name='description'
             onChange={handleInputChange}
             value={skillFormData.description}
           ></input>
 
-          <p>price:</p>
+          <p>Price:</p>
           <input
             type='text'
-            placeholder='your price'
+            placeholder='Your price'
             name='price'
             onChange={handleInputChange}
             value={skillFormData.price}
           ></input>
 
-          <p>category:</p>
+          <p>Category:</p>
           <select
             id='ddlViewBy'
             name='category'
@@ -99,14 +99,14 @@ const SkillCreate = () => {
             <option value={'Financial'}>Financial</option>
           </select>
 
-          <Button
+          <button
             type='submit'
             onClick={() => {
               // window.location.reload();
             }}
           >
-            Create Skill
-          </Button>
+            Create
+          </button>
         </div>
       </Form>
     </div>

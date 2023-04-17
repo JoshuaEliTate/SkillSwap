@@ -36,24 +36,3 @@ mutation addSkill($skillName: String, $description: String, $price: Int, $catego
     }
   }
 }`
-
-
-// export const ADD_SKILL = gql`
-//   mutation addSkill(
-//     $skillName: String!
-//     $price: String!
-//     $description: String
-//   ) {
-//     addSkill(
-//       skillName: $skillName
-//       price: $price
-//       description: $description
-//     ) {
-//       _id
-//       skillName
-//       description
-//       price
-//       user
-//     }
-//   }
-// `;
