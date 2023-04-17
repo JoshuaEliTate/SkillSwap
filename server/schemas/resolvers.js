@@ -3,7 +3,6 @@ const { User, Skill, Category, Session } = require('../models');
 const { signToken } = require('../utils/auth');
 const { findById } = require('../models/Category');
 
-//hello
 const resolvers = {
   Query: {
     // categories: async () => Category.find().populate("skills"),
@@ -42,23 +41,22 @@ const resolvers = {
       return { token, user };
     },
     addSkill: async (parent, args, context) => {
-      console.log('context.user', context.user);
-      console.log('context.user._id', context.user._id);
-      console.log(args)
+      // console.log('context.user', context.user);
+      // console.log('context.user._id', context.user._id);
+      // console.log(args);
       const object = await { ...args, user: context.user._id };
       const skill = await Skill.create(object);
       const user = await User.findById(context.user._id);
       user.skills.push(skill._id);
       await user.save();
-      const finalSkill = await Skill.findById(skill._id)
-        .populate('user')
-        // .populate({
-        //   path: 'skills',
-        //   populate: 'skill',
-        // });
-      console.log(finalSkill);
+      const finalSkill = await Skill.findById(skill._id).populate('user');
+      // .populate({
+      //   path: 'skills',
+      //   populate: 'skill',
+      // });
+      // console.log(finalSkill);
       return finalSkill;
-    }, 
+    },
     updateUser: async (parent, args, context) => {
       if (context.user) {
         return User.findByIdAndUpdate(context.user.id, args, {

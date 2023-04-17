@@ -1,8 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { Link } from 'react-router-dom';
-import { Navbar, Nav, Container, Modal, Tab } from 'react-bootstrap';
 import Auth from '../utils/auth';
-import Login from '../pages/Login';
 
 const AppNavbar = () => {
   if (Auth.loggedIn()) {
@@ -15,7 +12,7 @@ const AppNavbar = () => {
 
     return (
       <header>
-        <h2 className='logo'>Logo</h2>
+        <h2 className='logo'>SkillSwap</h2>
         <nav className='navigation'>
           <a href='/'>Home</a>
           <a href='/user'>User</a>
