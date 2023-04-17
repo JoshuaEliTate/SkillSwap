@@ -35,7 +35,6 @@ const AppUser = () => {
 
   // Otherwise, render the user's profile
   const user = userId ? data?.user : userData || {};
-console.log(data.me.skills)
   return (
     <div>
       <SkillCreate />
