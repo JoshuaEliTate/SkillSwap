@@ -9,15 +9,22 @@ const SkillCreate = () => {
     skillName: '',
     description: '',
     price: '',
+    category: ''
   });
   const [validated] = useState(false);
   const [addSkill, { error, data }] = useMutation(ADD_SKILL);
 
   const handleInputChange = (event) => {
+    console.log(event.target)
     let { name, value } = event.target;
     if (name == 'price') {
       value = parseInt(value);
+    }else if (name == 'category'){
+      value = value
     }
+    console.log(name)
+    console.log(value)
+
     setSkillFormData({ ...skillFormData, [name]: value });
   };
 
@@ -26,13 +33,15 @@ const SkillCreate = () => {
 
     // check if form has everything (as per react-bootstrap docs)
     const form = event.currentTarget;
-    console.log(skillFormData);
+    console.log(skillFormData.description);
+    console.log(skillFormData.category);
 
     try {
       const { response } = await addSkill({ variables: { ...skillFormData } });
 
-      if (!response.ok) {
-        console.log(skillFormData);
+      if (!response) {
+        console.log(response)
+        console.log({...skillFormData});
         console.log('error');
         throw new Error('something went wrong!');
       }
@@ -47,6 +56,7 @@ const SkillCreate = () => {
       skillName: '',
       description: '',
       price: '',
+      category: ''
     });
   };
 
@@ -81,10 +91,25 @@ const SkillCreate = () => {
             onChange={handleInputChange}
             value={skillFormData.price}
           ></input>
+
+          <p>category:</p>
+          <select id="ddlViewBy"
+          name='category'
+          onChange={handleInputChange}
+          // value={skillFormData.category}
+          >
+            <option value={"Sports"} selected="selected">Sports</option>
+            <option value={'Academics'}>Academics</option>
+            <option value={'Culinary'}>Culinary</option>
+            <option value={'Tech'}>Tech</option>
+            <option value={'Mechanics'}>Mechanics</option>
+            <option value={'Financial'}>Financial</option>
+          </select> 
+
           <Button
             type='submit'
             onClick={() => {
-              window.location.reload();
+              // window.location.reload();
             }}
           >
             Create Skill

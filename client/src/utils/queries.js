@@ -22,3 +22,18 @@ query Me {
         }
     }
   }`;
+
+ export const QUERY_SKILLS = gql`
+ query Skill {
+    skills {
+      skillName
+      description
+      price
+      user {
+        email
+        username
+      }
+    }
+  }`
+
+  
