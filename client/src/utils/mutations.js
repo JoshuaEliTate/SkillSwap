@@ -24,11 +24,12 @@ export const ADD_USER = gql`
 `;
 
 export const ADD_SKILL = gql`
-mutation addSkill($skillName: String, $description: String, $price: Int) {
-  addSkill(skillName: $skillName, description: $description, price: $price) {
+mutation addSkill($skillName: String, $description: String, $price: Int, $category: String) {
+  addSkill(skillName: $skillName, description: $description, price: $price, category: $category ) {
     skillName
     description
     price
+    category
     user {
       _id
       username

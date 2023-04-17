@@ -35,7 +35,6 @@ const AppUser = () => {
 
   // Otherwise, render the user's profile
   const user = userId ? data?.user : userData || {};
-
   return (
     <div>
       <SkillCreate />
@@ -55,6 +54,7 @@ const AppUser = () => {
               </h4>
               <p> {skill.description} </p>
               <p>${skill.price}</p>
+              <p>{skill.category}</p>
             </div>
           ))
         ) : (
