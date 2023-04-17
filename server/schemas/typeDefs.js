@@ -30,9 +30,11 @@ const typeDefs = gql`
   }
 
   type Query {
+    allSkills: [Skill]
     skills(category: ID, name: String): [Skill]
     skill(_id: ID!): Skill
     user(userId: ID!): User
+    category(category: String): [Skill]
     session: Session
 
     me: User

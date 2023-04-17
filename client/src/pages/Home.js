@@ -6,10 +6,23 @@ import { useQuery } from '@apollo/client';
 import { QUERY_SINGLE_USER, QUERY_ME, QUERY_SKILLS } from '../utils/queries';
 import Login from './Login';
 import SkillsList from '../components/SkillSearchAll';
+
+let searched = false
 const AppHome = () => {
   const { loading, data } = useQuery(QUERY_SKILLS);
   const skills = data?.skills || [];
-  console.log(skills)
+  const [categoryValue, setCategoryValue] = useState("");
+  const categoryChange = (event) => {
+    let { value } = event.target;
+    console.log(value)
+    setCategoryValue(value);
+  };
+
+  const handleFormSubmit = async (event) => {
+    searched = true
+  };
+
+
 
   if (!Auth.loggedIn()) {
     return <Login />;
@@ -33,10 +46,39 @@ const AppHome = () => {
           Search
         </Button>
       </Form>
-      {/* <SkillsList
+      
+      <Form
+      onSubmit={handleFormSubmit}
+      >
+        <div>
+            <h3>Search By Category:</h3>
+            <select id="ddlViewBy"
+                name='category'
+                onChange={categoryChange}
+                // value={skillFormData.category}
+                >
+              <option value={"Sports"}>Sports</option>
+              <option value={'Academics'}>Academics</option>
+              <option value={'Culinary'}>Culinary</option>
+              <option value={'Tech'}>Tech</option>
+              <option value={'Mechanics'}>Mechanics</option>
+              <option value={'Financial'}>Financial</option>
+            </select> 
+            <Button
+              type='submit'
+              onClick={() => {
+                // window.location.reload();
+              }}
+            >
+              Search Skills
+            </Button>
+          </div>
+        </Form>
+        {searched ?
+        <SkillsList
               skills={skills}
-              title="Here's the current roster of Skills..."
-            /> */}
+              title={categoryValue}
+            /> : <p></p> }
       </section>
       
     );
