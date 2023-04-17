@@ -9,7 +9,7 @@ const SkillCreate = () => {
     skillName: '',
     description: '',
     price: '',
-    category: ''
+    category: 'sports'
   });
   const [validated] = useState(false);
   const [addSkill, { error, data }] = useMutation(ADD_SKILL);
@@ -37,16 +37,16 @@ const SkillCreate = () => {
     console.log(skillFormData.category);
 
     try {
-      const { response } = await addSkill({ variables: { ...skillFormData } });
+      const { data } = await addSkill({ variables: { ...skillFormData } });
 
-      if (!response) {
-        console.log(response)
+      if (!data) {
+        console.log(data)
         console.log({...skillFormData});
         console.log('error');
         throw new Error('something went wrong!');
       }
-
-      const { token, skill } = response.json();
+      console.log(data)
+      const { token, skill } = data.json();
       // window.location.reload();
     } catch (err) {
       console.error(err);
@@ -56,7 +56,7 @@ const SkillCreate = () => {
       skillName: '',
       description: '',
       price: '',
-      category: ''
+      category: skillFormData.category
     });
   };
 

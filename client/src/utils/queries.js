@@ -19,6 +19,7 @@ query Me {
           skillName
           description
           price
+          category
         }
     }
   }`;
@@ -29,6 +30,7 @@ query Me {
       skillName
       description
       price
+      category
       user {
         email
         username
@@ -36,4 +38,3 @@ query Me {
     }
   }`
 
-  
