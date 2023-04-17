@@ -13,7 +13,7 @@ router.route('/signup').post(createUser);
 
 router.route('/login').post(login);
 
-router.get('/all').get(getAllUsers);
+router.route('/all').get(getAllUsers);
 
 router.route('/user/:userId').get(getSingleUser);
 

@@ -25,7 +25,7 @@ export const getUser = (userId, token) => {
 };
 
 export const getAllUsers = () => {
-  return fetch(`/api/users/user/all`, {
+  return fetch(`/api/users/all`, {
     method: 'GET',
   });
 };

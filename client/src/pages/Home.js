@@ -8,18 +8,20 @@ import Login from './Login';
 import { getUser, getAllUsers } from '../utils/API';
 
 const AppHome = () => {
+  const [allUsers, setAllUsers] = useState({});
+
   const searchAllUser = async (event) => {
     event.preventDefault();
 
     try {
-      const response = await getAllUsers();
+      const response = await getAllUsers([]);
 
       if (!response.ok) {
         throw new Error('Something went wrong!');
       }
 
-      const users = await response.json();
-      console.log('this res', response);
+      const allUsers = await response.json();
+      setAllUsers(allUsers);
     } catch (error) {
       console.error(error);
     }
@@ -29,23 +31,33 @@ const AppHome = () => {
     return <Login />;
   } else
     return (
-      <Form>
-        <Form.Group>
-          <Form.Label>Search user:</Form.Label>
-          <Form.Control type='search' placeholder='Search users' />
-        </Form.Group>
-        <button variant='primary' type='submit' onSubmit={searchAllUser}>
-          Search
-        </button>
+      <div>
+        <div>
+          <Form onSubmit={searchAllUser}>
+            <Form.Group>
+              <Form.Label>Search user:</Form.Label>
+              <Form.Control type='search' placeholder='Search users' />
+            </Form.Group>
+            <Button variant='primary' type='submit'>
+              Search
+            </Button>
+          </Form>
 
-        <Form.Group>
-          <Form.Label>Search skill:</Form.Label>
-          <Form.Control type='search' placeholder='Search skills' />
-        </Form.Group>
-        <Button variant='primary' type='submit'>
-          Search
-        </Button>
-      </Form>
+          <Form.Group>
+            <Form.Label>Search skill:</Form.Label>
+            <Form.Control type='search' placeholder='Search skills' />
+          </Form.Group>
+          <Button variant='primary' type='submit'>
+            Search
+          </Button>
+        </div>
+
+        {allUsers.length > 0 ? (
+          allUsers.map((user) => <p key={user._id}>{user.username}</p>)
+        ) : (
+          <p>Please search</p>
+        )}
+      </div>
     );
 };
 
