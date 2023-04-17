@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { Form, Button, Alert } from 'react-bootstrap';
+import { Form, Button } from 'react-bootstrap';
 import { ADD_SKILL } from '../utils/mutations';
-import { createSkill } from '../utils/API';
 import { useMutation } from '@apollo/client';
 
 const SkillCreate = () => {
@@ -9,21 +8,18 @@ const SkillCreate = () => {
     skillName: '',
     description: '',
     price: '',
-    category: 'sports'
+    category: 'sports',
   });
   const [validated] = useState(false);
   const [addSkill, { error, data }] = useMutation(ADD_SKILL);
 
   const handleInputChange = (event) => {
-    console.log(event.target)
     let { name, value } = event.target;
     if (name == 'price') {
       value = parseInt(value);
-    }else if (name == 'category'){
-      value = value
+    } else if (name == 'category') {
+      value = value;
     }
-    console.log(name)
-    console.log(value)
 
     setSkillFormData({ ...skillFormData, [name]: value });
   };
@@ -31,23 +27,19 @@ const SkillCreate = () => {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
-    // check if form has everything (as per react-bootstrap docs)
-    const form = event.currentTarget;
-    console.log(skillFormData.description);
-    console.log(skillFormData.category);
-
     try {
-      const { data } = await addSkill({ variables: { ...skillFormData } });
+      const result = await addSkill({ variables: { ...skillFormData } });
 
-      if (!data) {
-        console.log(data)
-        console.log({...skillFormData});
+      if (!result.data) {
+        console.log(result.data);
+        console.log({ ...skillFormData });
         console.log('error');
         throw new Error('something went wrong!');
       }
-      console.log(data)
-      const { token, skill } = data.json();
-      // window.location.reload();
+
+      console.log(result.data);
+      const { token, skill } = result.data.addSkill;
+      window.location.reload();
     } catch (err) {
       console.error(err);
     }
@@ -56,7 +48,7 @@ const SkillCreate = () => {
       skillName: '',
       description: '',
       price: '',
-      category: skillFormData.category
+      category: skillFormData.category,
     });
   };
 
@@ -93,18 +85,19 @@ const SkillCreate = () => {
           ></input>
 
           <p>category:</p>
-          <select id="ddlViewBy"
-          name='category'
-          onChange={handleInputChange}
-          // value={skillFormData.category}
+          <select
+            id='ddlViewBy'
+            name='category'
+            onChange={handleInputChange}
+            value={skillFormData.category}
           >
-            <option value={"Sports"} selected="selected">Sports</option>
+            <option value={'Sports'}>Sports</option>
             <option value={'Academics'}>Academics</option>
             <option value={'Culinary'}>Culinary</option>
             <option value={'Tech'}>Tech</option>
             <option value={'Mechanics'}>Mechanics</option>
             <option value={'Financial'}>Financial</option>
-          </select> 
+          </select>
 
           <Button
             type='submit'

@@ -1,14 +1,20 @@
 // import user model
 const { User } = require('../models');
+const { all } = require('../routes/api');
 // import sign token function from auth
 const { signToken } = require('../utils/auth');
 
 module.exports = {
-  getUsers(req, res) {
-    User.find()
-      .then((users) => res.json(users))
-      .catch((err) => res.status(500).json(err));
+  //get all users
+  async getAllUsers(req, res) {
+    try {
+      const users = await User.find({});
+      res.json(users);
+    } catch (err) {
+      res.status(500).json(err);
+    }
   },
+
   // get a single user by either their id or their username
   async getSingleUser({ user = null, params }, res) {
     const foundUser = await User.findOne({
@@ -33,20 +39,27 @@ module.exports = {
 
       // Validate that the body has username, email, and password
       if (!username || !email || !password) {
-        return res.status(400).json({ message: 'Please provide username, email, and password' });
+        return res
+          .status(400)
+          .json({ message: 'Please provide username, email, and password' });
       }
 
       const user = await User.create(body);
 
       if (!user) {
-        return res.status(400).json({ message: 'Unable to create user. Please try again.' });
+        return res
+          .status(400)
+          .json({ message: 'Unable to create user. Please try again.' });
       }
 
       const token = signToken(user);
       res.json({ token, user });
     } catch (e) {
-      if (e.code === 11000) { // Duplicate key error
-        return res.status(400).json({ message: 'User with this email or username already exists' });
+      if (e.code === 11000) {
+        // Duplicate key error
+        return res
+          .status(400)
+          .json({ message: 'User with this email or username already exists' });
       }
       return res.status(500).json({ message: 'An unexpected error occurred' });
     }
