@@ -18,8 +18,34 @@ const AppHome = () => {
     setCategoryValue(value);
   };
 
-  const handleFormSubmit = async (event) => {
-    searched = true
+  const [search, setSearch] = useState('');
+  const [catSearch, setCatSearch] = useState('');
+  const [filteredData, setFilteredData] = useState();
+
+  const handleChange = (e) => {
+    const searchValue = e.target.value;
+    console.log(skills)
+    setSearch(searchValue);
+    if(searchValue == ''){
+      return 
+    }
+  
+    const filtered = skills?.filter(item => {
+      return item.skillName?.includes(searchValue);
+    });
+    setFilteredData(filtered);
+  };
+
+  const handleCategoryChange = (e) => {
+    console.log(e)
+    const searchValue = e.target.value;
+    console.log(skills)
+    setCatSearch(searchValue);
+  
+    const filtered = skills?.filter(item => {
+      return item.category?.toLowerCase().includes(searchValue.toLowerCase());
+    });
+    setFilteredData(filtered);
   };
 
 
@@ -40,48 +66,55 @@ const AppHome = () => {
 
         <Form.Group>
           <Form.Label>Search skill:</Form.Label>
-          <Form.Control type='search' placeholder='Search skills' />
+          <Form.Control value={search} onChange={handleChange} type='search' placeholder='Search skills' />
         </Form.Group>
-        <Button variant='primary' type='submit'>
-          Search
-        </Button>
+
       </Form>
+
       
-      <Form
-      onSubmit={handleFormSubmit}
-      >
-        <div>
+
+
+      <Form>
             <h3>Search By Category:</h3>
             <select id="ddlViewBy"
                 name='category'
-                onChange={categoryChange}
+                onChange={handleCategoryChange}
                 // value={skillFormData.category}
                 >
-              <option value={"Sports"}>Sports</option>
-              <option value={'Academics'}>Academics</option>
-              <option value={'Culinary'}>Culinary</option>
-              <option value={'Tech'}>Tech</option>
-              <option value={'Mechanics'}>Mechanics</option>
-              <option value={'Financial'}>Financial</option>
+              <option value={"sports"}>Sports</option>
+              <option value={'academics'}>Academics</option>
+              <option value={'culinary'}>Culinary</option>
+              <option value={'tech'}>Tech</option>
+              <option value={'mechanics'}>Mechanics</option>
+              <option value={'financial'}>Financial</option>
             </select> 
-            <Button
-              type='submit'
-              onClick={() => {
-                // window.location.reload();
-              }}
-            >
-              Search Skills
-            </Button>
-          </div>
         </Form>
-        {searched ?
-        <SkillsList
-              skills={skills}
-              title={categoryValue}
-            /> : <p></p> }
+      
+      <ul>
+        {Array.isArray(filteredData) && filteredData.map((item,index)=> 
+          <li key={index}>
+            <h3>Filtered Skills</h3>
+            <p>{item.skillName}</p>
+          </li>
+        )}
+      </ul>
+
       </section>
       
     );
 };
 
 export default AppHome;
+
+
+
+//   {searched ?
+//   <SkillsList
+//         skills={skills}
+//         title={categoryValue}
+//       /> : <p></p> }
+
+// button for searching for skills
+//  <Button variant='primary' type='submit'>
+// Search
+// </Button> 
