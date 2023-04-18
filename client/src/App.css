@@ -35,9 +35,9 @@ header {
   z-index: 99;
 }
 
-/* .loginForm.close {
-  display: none;
-} */
+.loginForm{
+  margin-top: 100px;
+}
 
 .logo {
   font-size: 2em;
