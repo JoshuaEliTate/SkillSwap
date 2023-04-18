@@ -25,9 +25,15 @@ const AppUser = () => {
   // Get user data from Auth
   const { data: userData } = Auth.getUser();
   // Redirect to homepage if user is viewing their own profile
-  if (Auth.loggedIn() && userData._id === userId) {
-    return <Navigate to='/' />;
-  }
+
+
+
+
+  // if (Auth.loggedIn() && userData._id === userId) {
+  //   return <Navigate to='/' />;
+  // }
+
+
 
   // Render loading message while query is running
   if (loading) {
