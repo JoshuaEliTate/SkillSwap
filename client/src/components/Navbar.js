@@ -23,7 +23,7 @@ const AppNavbar = () => {
             className='btnLogin-popup'
             onClick={() => {
               Auth.logout();
-              window.location.reload();
+              // window.location.reload();
             }}
           >
             Logout
@@ -39,7 +39,7 @@ const AppNavbar = () => {
           <button
             className='btnLogin-popup'
             onClick={() => {
-              window.location.reload();
+              // window.location.reload();
             }}
           >
             Login
