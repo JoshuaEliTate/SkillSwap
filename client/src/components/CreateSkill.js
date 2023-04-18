@@ -39,7 +39,7 @@ const SkillCreate = () => {
 
       console.log(result.data);
       const { token, skill } = result.data.addSkill;
-      window.location.reload();
+      // window.location.reload();
     } catch (err) {
       console.error(err);
     }
