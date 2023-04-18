@@ -17,7 +17,7 @@ const AppNavbar = () => {
         <nav className='navigation'>
           <Link to='/'>Home</Link>
           <Link to='/user'>User</Link>
-          <a>{message}</a>
+          <p>{message}</p>
           <Link
             to='/'
             className='btnLogin-popup'
