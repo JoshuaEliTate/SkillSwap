@@ -4,11 +4,12 @@
   "description": "a simple teacher website where you can find people to teach you skills",
   "main": "index.js",
   "scripts": {
-    "start": "node server/server.js",
-    "develop": "concurrently \"cd server && npm run watch\" \"cd client && npm start\"",
-    "install": "cd server && npm i && cd ../client && npm i",
-    "seed": "cd server && npm run seed",
-    "build": "cd client && npm run build"
+    "client-install": "cd client && npm install",
+    "server-install": "cd server && npm install",
+    "install": "npm run client-install && npm run server-install",
+    "build": "cd client && npm run build",
+    "start": "cd server && npm start"
+
   },
   "repository": {
     "type": "git",
@@ -31,3 +32,4 @@
     "concurrently": "^8.0.1"
   }
 }
+
