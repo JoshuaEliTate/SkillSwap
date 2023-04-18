@@ -5,10 +5,13 @@ import { Navigate, useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import { QUERY_SINGLE_USER, QUERY_ME, QUERY_SKILLS } from '../utils/queries';
 import Login from './Login';
+
 import SkillsList from '../components/SkillSearchAll';
 
 
 import { getUser, getAllUsers } from '../utils/API';
+
+
 
 const AppHome = () => {
   const [singleUser, setSingleUser] = useState({});
@@ -37,9 +40,9 @@ const AppHome = () => {
     if(searchValue == ''){
       return 
     }
-  
+    // setSearch('');
     const filtered = skills?.filter(item => {
-      return item.skillName?.includes(searchValue);
+      return item.skillName?.toLowerCase().includes(searchValue.toLowerCase());
     });
     setFilteredData(filtered);
   };
@@ -54,6 +57,7 @@ const AppHome = () => {
       return item.category?.toLowerCase().includes(searchValue.toLowerCase());
     });
     setFilteredData(filtered);
+    setSingleUser('')
   };
 
   const searchSkillsChange = (event) => {
@@ -109,15 +113,16 @@ const AppHome = () => {
 
       if (singleUser.username) {
         for (let i = 0; i < allUsers.length; i++) {
-          if (allUsers[i].username === singleUser.username) {
+          if (allUsers[i].username.toLowerCase() === singleUser.username.toLowerCase()) {
             setAllUsers([allUsers[i]]);
             return;
           } else {
             setAllUsers([]);
           }
         }
-        // If we reach this point, no matching user was found
-        return 'User not found';
+        // setFilteredData('');
+        // If we reach this point, no matching user was 
+        return ;
       }
     } catch (error) {
       console.error(error);
@@ -129,61 +134,29 @@ const AppHome = () => {
   } else
     return (
       <div>
-        <div>
-          <Form onSubmit={searchAllUser}>
-            <Form.Group>
-              <Form.Label>Search user:</Form.Label>
+        <div className='centered'>
+          <div className='search-box'>
+            <form onSubmit={searchAllUser}>
+              <label>Search user:</label>
+              <br></br>
               <input
                 type='search'
                 name='username'
                 onChange={searchInputChange}
                 value={singleUser.username || ''}
               ></input>
-            </Form.Group>
-            <Button variant='primary' type='submit'>
-              Search
-            </Button>
-          </Form>
-          <Form onSubmit={searchAllSkills}>
-            <Form.Group>
-              <Form.Label>Search skill:</Form.Label>
-              <input
-                type='search'
-                name='skillName'
-                onChange={searchSkillsChange}
-                value={singleSkill.skillName || ''}
-              ></input>
-            </Form.Group>
-            <Button variant='primary' type='submit'>
-              Search
-            </Button>
-          </Form>
-        </div>
-        <div className='card'>
-          {allUsers.length > 0 ? (
-            allUsers.map((user) => (
-              <div className='container' key={user._id}>
-                <p>Username: {user.username}</p>
-                <p>Email: {user.email}</p>
-                <p>Skill Count: {user.skills.length}</p>
-              </div>
-            ))
-          ) : (
-            <p>User not found</p>
-          )}
-        
-      <Form>
-        <Form.Group>
-          <Form.Label>Search skill:</Form.Label>
-          <Form.Control value={search} onChange={handleChange} type='search' placeholder='Search skills' />
-        </Form.Group>
 
-      </Form>
-
-      
-
-
-      <Form>
+              <button variant='primary' type='submit'>
+                Search
+              </button>
+            </form>
+            <form>
+                <Form.Group>
+                  <Form.Label>Search skill:</Form.Label>
+                  <Form.Control value={search} onChange={handleChange} type='search' placeholder='Search skills' />
+                </Form.Group>
+            </form>
+            <Form>
             <h3>Search By Category:</h3>
             <select id="ddlViewBy"
                 name='category'
@@ -198,40 +171,77 @@ const AppHome = () => {
               <option value={'financial'}>Financial</option>
             </select> 
         </Form>
+          </div>
+        </div>
+        <div className='card'>
+          
+        
+
+
       
+
+    <ul>
+      <li>
+
+        </li>
+        <li>
       <ul>
         {Array.isArray(filteredData) && filteredData.map((item,index)=> 
           <li key={index}>
-            <h3>Filtered Skills</h3>
-            <p>{item.skillName}</p>
-            <p>{item.description}</p>
-            <p>${item.price}</p>
-            <p>{item.user.username}</p>
-            <p>{item.user.email}</p>
+            <ul>
+            <li>_________________________</li>
+            <li>{item.skillName}</li>
+            <li>{item.description}</li>
+            <li>${item.price}</li>
+            <li>{item.user.username}</li>
+            <li>{item.user.email}</li>
+            </ul>
           </li>
         )}
       </ul>
-
-      
-      
-
-        <div className='card'>
-          {allSkills.length > 0 ? (
-            allSkills.map((skill) => (
-              <div className='container' key={skill._id}>
-                <p>Category: {skill.category}</p>
-                <p>Skill name: {skill.skillName}</p>
-                <p>Description:{skill.description}</p>
-                <p>Instructor:{skill.user.username}</p>
-                <p>Email: {skill.user.email}</p>
+      </li>
+      </ul>
+      {allUsers.length > 0 ? (
+            allUsers.map((user) => (
+              <div className='container' key={user._id}>
+                <p>Username: {user.username}</p>
+                <p>Email: {user.email}</p>
+                <p>Skill Count: {user.skills.length}</p>
               </div>
             ))
           ) : (
-            <p>Skill not found</p>
+            <p></p>
           )}
+      
+
+            </div>
+
+
+
+        <div className='result-box'>
+          <div className='centered'>
+            <div className='card'>
+
+            </div>
+            <div className='card'>
+              {allSkills.length > 0 ? (
+                allSkills.map((skill) => (
+                  <div className='container' key={skill._id}>
+                    <p>Category: {skill.category}</p>
+                    <p>Skill name: {skill.skillName}</p>
+                    <p>Description:{skill.description}</p>
+                    <p>Instructor:{skill.user.username}</p>
+                    <p>Email: {skill.user.email}</p>
+                  </div>
+                ))
+              ) : (
+                <p></p>
+              )}
+            </div>
+          </div>
         </div>
-    </div>
-  </div>
+      </div>
+
     
       
 
@@ -252,3 +262,23 @@ export default AppHome;
 //  <Button variant='primary' type='submit'>
 // Search
 // </Button> 
+
+              {/* <label>Search skill:</label>
+              <input
+                type='search'
+                name='skillName'
+                onChange={searchSkillsChange}
+                value={singleSkill.skillName || ''}
+              ></input> */}
+
+              // {allUsers.length > 0 ? (
+              //   allUsers.map((user) => (
+              //     <div className='container' key={user._id}>
+              //       <p>Username: {user.username}</p>
+              //       <p>Email: {user.email}</p>
+              //       <p>Skill Count: {user.skills.length}</p>
+              //     </div>
+              //   ))
+              // ) : (
+              //   <p></p>
+              // )}

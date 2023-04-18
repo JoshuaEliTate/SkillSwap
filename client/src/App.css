@@ -5,13 +5,20 @@
   padding: 0;
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
+  list-style-type: none
 }
 body {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: rgb(75, 97, 97);
+  /* background: rgb(102, 161, 161); */
+  background-image: linear-gradient(
+    to right,
+    rgb(24, 152, 195),
+    rgb(102, 161, 161)
+  );
+
   background-size: cover;
   background-position: center;
 }
@@ -212,8 +219,36 @@ header {
   color: #fff;
   font-weight: 500;
 }
+/* .btn1 {
+  width: 100%;
+  height: 45px;
+  background: #162938;
+  border: none;
+  outline: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1em;
+  color: #fff;
+  font-weight: 500;
+}
+.centered {
+  text-align: center;
+  align-items: center;
+}
+.search-box {
+  align-items: center;
+  text-align: center;
+  height: 15vh;
+  width: 50vh; 
+ border: 3px solid black;
+  border-radius: 5px; 
 
-.login-register {
+ .result-box {
+  border: 3px solid black;
+  height: 1;
+  width: 87vh;
+} */
+*/ .login-register {
   font-size: 0.9em;
   color: #162938;
   text-align: center;
@@ -237,14 +272,6 @@ header {
   text-transform: capitalize;
 }
 
-/* .App {
-  text-align: center;
-} */
-
-/* .App-logo {
-  height: 40vmin;
-  pointer-events: none;
-} */
 .profile {
   border-radius: 5px;
   display: flex;
@@ -258,12 +285,13 @@ header {
   flex-wrap: wrap;
   flex-direction: row;
   align-items: center;
+  text-align: center;
 }
 
 .container {
   border: 1px solid black;
   border-radius: 0.25rem;
-  text-align: center;
+  text-align: left;
   height: auto;
   width: 200px;
   margin: 1em;
@@ -277,7 +305,16 @@ header {
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+    animation: App-logo -spin infinite 20s linear;
+  }
+  .container {
+    max-width: 100%;
+    padding: 20px;
+  }
+
+  .box {
+    height: 100px;
+    background-color: red;
   }
 }
 
@@ -303,4 +340,117 @@ header {
   to {
     transform: rotate(360deg);
   }
+}
+
+/* Apply styles to the search box and its contents */
+.search-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: transparent;
+  padding: 20px;
+  border-radius: 5px;
+  /* box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.3); */
+  margin-top: 25vh;
+  margin-bottom: 10px;
+  text-align: center;
+
+  /* align-items: center;
+  text-align: center;
+  height: 15vh;
+  width: 50vh;
+  border: 3px solid black;
+  border-radius: 5px; */
+}
+
+.search-box label {
+  font-size: 1.2em;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.search-box input[type='search'] {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.2);
+  margin-bottom: 10px;
+  width: 100%;
+  max-width: 260px;
+}
+
+.search-box button[type='submit'] {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.search-box button[type='submit']:hover {
+  background-color: #0069d9;
+}
+
+/* Apply styles to the result box and its contents */
+.result-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card {
+  /* background-color: #ffffff; */
+  padding: 20px;
+  border-radius: 5px;
+  /* box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.3); */
+  margin-bottom: 20px;
+  width: 100%;
+  max-width: 800px;
+}
+
+.container {
+  margin-bottom: 10px;
+}
+
+.container p {
+  margin: 0;
+  font-size: 1.1em;
+  font-weight: 600;
+}
+
+.profile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 50px;
+}
+
+.profile h2 {
+  margin-bottom: 20px;
+}
+
+.profile input,
+.profile select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  border: none;
+}
+
+.profile button {
+  background-color: #2f4f4f;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.profile button:hover {
+  background-color: #556b2f;
 }

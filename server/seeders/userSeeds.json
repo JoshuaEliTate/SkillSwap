@@ -1,0 +1,31 @@
+[
+  {
+    "_id": "643d9d6c17d4d6000db0fa9a",
+    "username": "dev",
+    "email": "dev@example.com",
+    "password": "password123",
+    "skills": [
+      "643d6d777e53b1507605c369",
+      "643d6dc17e53b1507605c371",
+      "643d6d777e53b1507605c469"
+    ]
+  },
+  {
+    "_id": "643d9d6c17d4d6000db0fa9c",
+    "username": "janedoe",
+    "email": "janedoe@example.com",
+    "password": "password123",
+    "skills": ["643d76c27e53b1507605c3a7", "643d77627e53b1507605c3b1"]
+  },
+  {
+    "_id": "643d9d6c17d4d6000db0fa9b",
+    "username": "bobsmith",
+    "email": "bobsmith@example.com",
+    "password": "password123",
+    "skills": [
+      "643d77907e53b1507605c3b9",
+      "643d77d27e53b1507605c3c3",
+      "643d6d777e53b1507605c359"
+    ]
+  }
+]

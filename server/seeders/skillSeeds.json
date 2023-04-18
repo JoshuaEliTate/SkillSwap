@@ -1,0 +1,66 @@
+[
+  {
+    "_id": "643d6d777e53b1507605c369",
+    "skillName": "Web Development",
+    "price": "50",
+    "description": "Developing web applications using modern technologies such as React and Node.js.",
+    "category": "Tech",
+    "user": "643d9d6c17d4d6000db0fa9a"
+  },
+  {
+    "_id": "643d6dc17e53b1507605c371",
+    "skillName": "Graphic Design",
+    "price": "30",
+    "description": "Creating visually stunning designs for businesses and individuals alike.",
+    "category": "Design",
+    "user": "643d9d6c17d4d6000db0fa9a"
+  },
+  {
+    "_id": "643d76c27e53b1507605c3a7",
+    "skillName": "Copywriting",
+    "price": "25",
+    "description": "Crafting compelling copy that captures the attention of your target audience.",
+    "category": "Writing",
+    "user": "643d9d6c17d4d6000db0fa9c"
+  },
+  {
+    "_id": "643d77627e53b1507605c3b1",
+    "skillName": "Basketball Coaching",
+    "price": "40",
+    "description": "Teaching the fundamentals of basketball to players of all skill levels.",
+    "category": "Sports",
+    "user": "643d9d6c17d4d6000db0fa9c"
+  },
+  {
+    "_id": "643d77907e53b1507605c3b9",
+    "skillName": "Math Tutoring",
+    "price": "20",
+    "description": "Helping students improve their understanding and proficiency in math.",
+    "category": "Academics",
+    "user": "643d9d6c17d4d6000db0fa9b"
+  },
+  {
+    "_id": "643d77d27e53b1507605c3c3",
+    "skillName": "Baking",
+    "price": "35",
+    "description": "Teaching others how to create delicious baked goods from scratch.",
+    "category": "Culinary",
+    "user": "643d9d6c17d4d6000db0fa9b"
+  },
+  {
+    "_id": "643d6d777e53b1507605c359",
+    "skillName": "Car Repair",
+    "price": "60",
+    "description": "Fixing various issues with cars, including engine problems and body damage.",
+    "category": "Mechanics",
+    "user": "643d9d6c17d4d6000db0fa9b"
+  },
+  {
+    "_id": "643d6d777e53b1507605c469",
+    "skillName": "Financial Planning",
+    "price": "45",
+    "description": "Helping individuals and businesses create financial plans that meet their goals.",
+    "category": "Financial",
+    "user": "643d9d6c17d4d6000db0fa9a"
+  }
+]
