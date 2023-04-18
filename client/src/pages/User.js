@@ -4,6 +4,7 @@ import { useQuery } from '@apollo/client';
 import { QUERY_SINGLE_USER, QUERY_ME } from '../utils/queries';
 import Auth from '../utils/auth';
 import SkillCreate from '../components/CreateSkill';
+import { Link } from 'react-router-dom';
 
 const AppUser = () => {
   const { userId } = useParams();
@@ -15,10 +16,10 @@ const AppUser = () => {
   // If user is not logged in, prompt them to log in
   if (!Auth.loggedIn()) {
     return (
-      <a href='/'>
+      <Link to='/'>
         You need to be logged in to see your user page. Use is link to sign up
         or log in!
-      </a>
+      </Link>
     );
   }
   // Get user data from Auth
