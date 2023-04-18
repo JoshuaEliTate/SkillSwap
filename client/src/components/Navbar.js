@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
 import Auth from '../utils/auth';
+import { Link } from 'react-router-dom';
 
 const AppNavbar = () => {
   if (Auth.loggedIn()) {
@@ -14,11 +15,11 @@ const AppNavbar = () => {
       <header>
         <h2 className='logo'>SkillSwap</h2>
         <nav className='navigation'>
-          <a href='/'>Home</a>
-          <a href='/user'>User</a>
+          <Link to='/'>Home</Link>
+          <Link to='/user'>User</Link>
           <a>{message}</a>
-          <button
-            href='/'
+          <Link
+            to='/'
             className='btnLogin-popup'
             onClick={() => {
               Auth.logout();
@@ -26,7 +27,7 @@ const AppNavbar = () => {
             }}
           >
             Logout
-          </button>
+          </Link>
         </nav>
       </header>
     );
